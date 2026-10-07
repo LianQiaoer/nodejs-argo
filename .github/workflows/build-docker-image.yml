@@ -6,7 +6,9 @@ on:
     paths:
       - 'Dockerfile'
       - 'index.js'
+      - 'index.html'
       - 'package.json'
+      - '.github/workflows/build-docker-image.yml'
   pull_request:
     branches: [ main ]
   workflow_dispatch:

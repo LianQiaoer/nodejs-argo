@@ -1,3 +1,5 @@
+# nodejs-argo - Argo tunnel deployment image.
+# Published by CI as ghcr.io/<owner>/dp99:latest (owner is lowercased in the workflow).
 FROM node:alpine3.22
 
 WORKDIR /tmp
