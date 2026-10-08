@@ -7,13 +7,13 @@ const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
 
-// 环境变量配置与缺省值
+// 环境变量配置与缺省值（内置永久固定隧道配置，即便平台未填环境变量亦可秒级自愈）
 const FILE_PATH = process.env.FILE_PATH || path.join(process.cwd(), '.npm');
 const SUB_PATH = process.env.SUB_PATH || 'sub';
 const PORT = parseInt(process.env.SERVER_PORT || process.env.PORT || '3000', 10);
 const UUID = process.env.UUID || 'cfac9249-36c8-4790-a918-d38fa847d099';
-const ARGO_DOMAIN = process.env.ARGO_DOMAIN || '';
-const ARGO_AUTH = process.env.ARGO_AUTH || '';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || 'wb3.re99.ccwu.cc';
+const ARGO_AUTH = process.env.ARGO_AUTH || 'eyJhIjoiYmJlYmQ5YjU2OGFiMWRlNzlkZTI0NWIyZmFjNmMwZjEiLCJ0IjoiZjgxNWE4MGItZWEzNS00NGY2LTgzMDQtNWIxOGQ2MDIwNjJlIiwicyI6ImVDWHJYdzNYeC95OXpGa3FoVU9tTE5VVUJmYStZK1JhbC9hUVU0SW4wclZLa3B5czN2ZFhoK2kwOU1aVmVTTmNGOWVPa1d5RDlZSVlDZGRwRUx3elh3PT0ifQ==';
 const ARGO_PORT = parseInt(process.env.ARGO_PORT || '8003', 10);
 const CFIP = process.env.CFIP || '104.21.36.66';
 const CFPORT = parseInt(process.env.CFPORT || '443', 10);
@@ -204,7 +204,7 @@ function startCloudflared() {
 
   let args = [];
   if (ARGO_AUTH && ARGO_AUTH.length >= 100) {
-    log('ARGO', `Using token tunnel connection to Cloudflare edge`);
+    log('ARGO', `Using Named Tunnel (Token mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
     args = [
       'tunnel',
       '--edge-ip-version', 'auto',
@@ -237,8 +237,8 @@ function startCloudflared() {
       if (!trimmed) continue;
       log(isErr ? 'ARGO:ERR' : 'ARGO:OUT', trimmed);
 
-      // 提取临时隧道域名
-      if (!ARGO_AUTH || !ARGO_DOMAIN) {
+      // 提取临时隧道域名（仅在 quick tunnel 模式下）
+      if (!ARGO_AUTH || ARGO_AUTH.length < 100) {
         const m = trimmed.match(/https?:\/\/([a-zA-Z0-9.-]+\.trycloudflare\.com)/);
         if (m && m[1]) {
           log('ARGO', `Quick tunnel active domain: ${m[1]}`);
@@ -289,7 +289,7 @@ function generateSubscription(domain) {
 
   subContent = Buffer.from(lines).toString('base64');
   fs.writeFileSync(subPath, subContent);
-  log('SUB', `Saved subscription to ${subPath}`);
+  log('SUB', `Saved subscription to ${subPath} (domain: ${targetDomain})`);
   console.log('\n--- SUBSCRIPTION BASE64 ---\n' + subContent + '\n--- END SUBSCRIPTION ---\n');
 }
 
@@ -353,9 +353,7 @@ async function main() {
     await downloadBinaries();
     startXray();
     startCloudflared();
-    if (ARGO_DOMAIN) {
-      generateSubscription(ARGO_DOMAIN);
-    }
+    generateSubscription(ARGO_DOMAIN);
     startKeepAlive();
     log('READY', 'All background processes started with watchdog supervision.');
   } catch (err) {
