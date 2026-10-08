@@ -1,578 +1,582 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEURAL // SYSTEM</title>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ORBIT · 在星辰之间寻找答案</title>
+<script>document.documentElement.classList.add('js');</script>
 <style>
-* {
-    box-sizing: border-box;
-}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background: #050608;
-    color: #e8edf2;
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        monospace;
-    overflow: hidden;
-}
+  :root{
+    --bg:#05060a;
+    --fg:#e9edf7;
+    --muted:#8b95ab;
+    --line:rgba(255,255,255,.08);
+    --glass:rgba(255,255,255,.035);
+    --cyan:#67e8f9;
+    --violet:#a78bfa;
+  }
 
-body {
-    position: relative;
-}
+  html{scroll-behavior:smooth}
 
-/* 背景网格 */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* 背景光晕 */
+  body::before{
+    content:'';
+    position:fixed;inset:0;z-index:0;pointer-events:none;
     background:
-        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-}
+      radial-gradient(58vw 58vw at 12% 6%, rgba(56,189,248,.10), transparent 62%),
+      radial-gradient(48vw 48vw at 88% 22%, rgba(167,139,250,.13), transparent 62%),
+      radial-gradient(70vw 50vw at 50% 104%, rgba(244,114,182,.07), transparent 62%);
+  }
 
-/* 扫描线 */
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(255,255,255,.012) 4px
-    );
-    pointer-events: none;
-}
+  canvas#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-.container {
-    width: min(1400px, 94vw);
-    height: 92vh;
-    margin: 4vh auto;
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    border: 1px solid #20252b;
-    background: rgba(7, 9, 12, .92);
+  /* ---------- 导航 ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:20px;
+    padding:16px clamp(20px,5vw,64px);
+    border-bottom:1px solid transparent;
+    transition:background .4s ease, border-color .4s ease, backdrop-filter .4s ease;
+  }
+  nav.scrolled{
+    background:rgba(5,6,10,.72);
+    backdrop-filter:blur(14px) saturate(150%);
+    -webkit-backdrop-filter:blur(14px) saturate(150%);
+    border-bottom-color:var(--line);
+  }
+
+  .logo{
+    font-size:.95rem;font-weight:800;letter-spacing:.3em;text-decoration:none;
+    background:linear-gradient(90deg,var(--cyan),var(--violet));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  nav ul{display:flex;gap:34px;list-style:none}
+  nav ul a{
+    position:relative;color:var(--muted);text-decoration:none;
+    font-size:.9rem;transition:color .3s;
+  }
+  nav ul a::after{
+    content:'';position:absolute;left:0;bottom:-6px;height:1px;width:0;
+    background:linear-gradient(90deg,var(--cyan),var(--violet));
+    transition:width .35s cubic-bezier(.2,.8,.2,1);
+  }
+  nav ul a:hover{color:var(--fg)}
+  nav ul a:hover::after{width:100%}
+
+  .nav-cta{
+    padding:9px 20px;border-radius:999px;text-decoration:none;
+    font-size:.84rem;color:var(--fg);
+    border:1px solid var(--line);background:var(--glass);
+    transition:border-color .3s, background .3s, transform .3s;
+  }
+  .nav-cta:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);transform:translateY(-1px)}
+
+  @media(max-width:760px){ nav ul{display:none} }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;z-index:1;
+    max-width:1280px;margin:0 auto;
+    min-height:100vh;min-height:100svh;
+    display:grid;grid-template-columns:1.08fr .92fr;
+    align-items:center;gap:clamp(28px,5vw,72px);
+    padding:130px clamp(20px,5vw,64px) 90px;
+  }
+
+  .pill{
+    display:inline-flex;align-items:center;gap:9px;
+    padding:6px 15px;border-radius:999px;margin-bottom:28px;
+    border:1px solid var(--line);background:var(--glass);
+    font-size:.76rem;letter-spacing:.1em;color:var(--muted);
+  }
+  .pill .dot{
+    width:6px;height:6px;border-radius:50%;background:var(--cyan);
+    box-shadow:0 0 10px var(--cyan);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+
+  h1{
+    font-size:clamp(2.5rem,6.6vw,5rem);
+    line-height:1.06;letter-spacing:-.035em;font-weight:800;
+    margin-bottom:24px;
+  }
+  h1 .grad{
+    background:linear-gradient(100deg,#67e8f9 0%,#a78bfa 48%,#f0abfc 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .hero p.lead{
+    color:var(--muted);
+    font-size:clamp(.98rem,1.5vw,1.12rem);
+    max-width:46ch;margin-bottom:40px;
+  }
+
+  .actions{display:flex;flex-wrap:wrap;gap:14px}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 28px;border-radius:999px;text-decoration:none;
+    font-size:.94rem;font-weight:600;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s, background .28s, border-color .28s;
+  }
+  .btn-primary{
+    color:#05060a;
+    background:linear-gradient(100deg,#67e8f9,#a78bfa);
+    box-shadow:0 10px 34px -10px rgba(103,232,249,.55);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 44px -10px rgba(167,139,250,.7)}
+  .btn-ghost{
+    color:var(--fg);border:1px solid var(--line);background:var(--glass);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .btn-ghost:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.24);background:rgba(255,255,255,.075)}
+
+  /* ---------- 行星 ---------- */
+  .planet-wrap{
+    display:flex;align-items:center;justify-content:center;
+  }
+  .planet{
+    position:relative;
+    width:min(400px,74vw);
+    aspect-ratio:1;
+    border-radius:50%;
+    background:radial-gradient(circle at 30% 26%,
+      #9defff 0%, #6aa6f5 13%, #6d3fd4 42%, #2a1150 68%, #0a0518 88%);
     box-shadow:
-        0 0 80px rgba(0,0,0,.8),
-        inset 0 0 80px rgba(255,255,255,.015);
-}
+      inset -34px -26px 72px rgba(0,0,0,.85),
+      inset 16px 12px 44px rgba(160,220,255,.18),
+      0 0 72px rgba(120,90,240,.40),
+      0 0 170px rgba(90,160,255,.22);
+    animation:float 9s ease-in-out infinite;
+  }
+  .planet::after{
+    content:'';position:absolute;left:50%;top:50%;
+    width:190%;height:190%;
+    transform:translate(-50%,-50%) rotate(-22deg) scaleY(.2);
+    border-radius:50%;
+    border:1.5px solid rgba(167,139,250,.45);
+    box-shadow:0 0 26px rgba(167,139,250,.3);
+    pointer-events:none;
+  }
+  @keyframes float{
+    0%,100%{transform:translateY(-12px)}
+    50%{transform:translateY(12px)}
+  }
 
-/* 左侧 */
-.sidebar {
-    border-right: 1px solid #20252b;
-    padding: 28px 20px;
-    display: flex;
-    flex-direction: column;
-}
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;text-align:center;padding-top:120px;gap:56px}
+    .hero p.lead{margin-left:auto;margin-right:auto}
+    .actions{justify-content:center}
+    .planet{width:min(280px,62vw)}
+  }
 
-.logo {
-    font-size: 18px;
-    letter-spacing: 4px;
-    font-weight: bold;
-    margin-bottom: 45px;
-}
+  /* ---------- 通用 Section ---------- */
+  section{
+    position:relative;z-index:1;
+    max-width:1280px;margin:0 auto;
+    padding:clamp(72px,10vw,140px) clamp(20px,5vw,64px);
+  }
 
-.logo span {
-    color: #00ff9d;
-}
+  .eyebrow{
+    font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--cyan);opacity:.85;margin-bottom:18px;display:block;
+  }
 
-.status {
-    border: 1px solid #20252b;
-    padding: 15px;
-    margin-bottom: 35px;
-}
+  .sec-head{max-width:660px;margin-bottom:clamp(40px,6vw,64px)}
+  .sec-head h2{
+    font-size:clamp(1.85rem,4vw,3rem);
+    line-height:1.14;letter-spacing:-.03em;font-weight:800;
+    margin-bottom:18px;
+  }
+  .sec-head p{color:var(--muted);font-size:1.02rem}
 
-.status-title {
-    font-size: 10px;
-    color: #666f78;
-    margin-bottom: 10px;
-}
+  /* ---------- 卡片 ---------- */
+  .cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(258px,1fr));
+    gap:20px;
+  }
 
-.online {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #00ff9d;
-    font-size: 12px;
-}
+  .card{
+    position:relative;overflow:hidden;
+    padding:32px 28px 36px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.015));
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    transition:transform .45s cubic-bezier(.2,.8,.2,1), border-color .45s;
+  }
+  .card::before{
+    content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;
+    background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),
+      rgba(167,139,250,.16), transparent 62%);
+    transition:opacity .45s;pointer-events:none;
+  }
+  .card:hover{transform:translateY(-7px);border-color:rgba(255,255,255,.17)}
+  .card:hover::before{opacity:1}
 
-.dot {
-    width: 7px;
-    height: 7px;
-    background: #00ff9d;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #00ff9d;
-}
+  .card-icon{
+    width:46px;height:46px;border-radius:14px;margin-bottom:22px;
+    display:grid;place-items:center;color:var(--cyan);
+    background:linear-gradient(150deg,rgba(103,232,249,.16),rgba(167,139,250,.12));
+    border:1px solid rgba(255,255,255,.09);
+  }
+  .card-icon svg{width:22px;height:22px}
 
-.nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+  .card h3{font-size:1.12rem;font-weight:650;letter-spacing:-.01em;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.92rem;line-height:1.72}
 
-.nav button {
-    border: none;
-    background: transparent;
-    color: #626a73;
-    text-align: left;
-    padding: 13px 12px;
-    font: inherit;
-    font-size: 12px;
-    cursor: pointer;
-    transition: .2s;
-}
+  /* ---------- 统计 ---------- */
+  .stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+    padding:52px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .stat-num{
+    display:block;line-height:1.08;margin-bottom:10px;
+    font-size:clamp(1.9rem,4.4vw,3.1rem);
+    font-weight:800;letter-spacing:-.03em;
+    background:linear-gradient(100deg,#67e8f9,#a78bfa);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .stat-label{color:var(--muted);font-size:.86rem;letter-spacing:.05em}
 
-.nav button:hover,
-.nav button.active {
-    color: #fff;
-    background: #11151a;
-}
+  @media(max-width:700px){
+    .stats{grid-template-columns:1fr;gap:36px;text-align:center}
+  }
 
-.nav button.active {
-    border-left: 2px solid #00ff9d;
-}
+  /* ---------- 页脚 ---------- */
+  footer{
+    position:relative;z-index:1;
+    text-align:center;
+    padding:56px 20px 76px;
+    border-top:1px solid var(--line);
+    color:var(--muted);font-size:.85rem;
+  }
+  footer .brand{
+    font-weight:800;letter-spacing:.3em;font-size:.85rem;margin-bottom:14px;
+    background:linear-gradient(90deg,var(--cyan),var(--violet));
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
 
-.sidebar-bottom {
-    margin-top: auto;
-    color: #41474e;
-    font-size: 9px;
-    line-height: 1.8;
-}
+  /* ---------- 滚动揭示 ---------- */
+  .js .reveal{
+    opacity:0;transform:translateY(28px);
+    transition:opacity .9s cubic-bezier(.2,.8,.2,1), transform .9s cubic-bezier(.2,.8,.2,1);
+    will-change:opacity, transform;
+  }
+  .js .reveal.in{opacity:1;transform:none}
 
-/* 主区域 */
-.main {
-    padding: 30px 35px;
-    overflow: auto;
-}
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #20252b;
-    padding-bottom: 22px;
-}
-
-.breadcrumb {
-    font-size: 11px;
-    color: #606872;
-}
-
-.breadcrumb b {
-    color: #d9dfe5;
-}
-
-.clock {
-    color: #69727b;
-    font-size: 11px;
-}
-
-.hero {
-    padding: 70px 0 45px;
-}
-
-.kicker {
-    color: #00ff9d;
-    font-size: 11px;
-    letter-spacing: 3px;
-    margin-bottom: 18px;
-}
-
-h1 {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    font-size: clamp(45px, 7vw, 100px);
-    line-height: .9;
-    letter-spacing: -5px;
-    font-weight: 800;
-}
-
-h1 span {
-    color: #00ff9d;
-}
-
-.subtitle {
-    max-width: 620px;
-    margin-top: 25px;
-    color: #737c85;
-    line-height: 1.8;
-    font-size: 12px;
-}
-
-/* 卡片 */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.card {
-    min-height: 160px;
-    border: 1px solid #20252b;
-    padding: 20px;
-    position: relative;
-    background: rgba(255,255,255,.012);
-    transition: .25s;
-}
-
-.card:hover {
-    border-color: #3b454e;
-    transform: translateY(-3px);
-}
-
-.card-label {
-    color: #59616a;
-    font-size: 10px;
-    margin-bottom: 35px;
-}
-
-.card-value {
-    font-size: 28px;
-    letter-spacing: -1px;
-}
-
-.card-value.green {
-    color: #00ff9d;
-}
-
-.card-info {
-    position: absolute;
-    bottom: 18px;
-    left: 20px;
-    right: 20px;
-    color: #41484f;
-    font-size: 9px;
-}
-
-/* Terminal */
-.terminal {
-    margin-top: 12px;
-    border: 1px solid #20252b;
-    background: #030405;
-}
-
-.terminal-head {
-    border-bottom: 1px solid #20252b;
-    padding: 12px 15px;
-    font-size: 10px;
-    color: #59616a;
-}
-
-.terminal-body {
-    padding: 20px;
-    height: 190px;
-    overflow: hidden;
-    font-size: 11px;
-    line-height: 1.9;
-}
-
-.line {
-    color: #59616a;
-}
-
-.line .green {
-    color: #00ff9d;
-}
-
-.line .white {
-    color: #dbe1e6;
-}
-
-/* 响应式 */
-@media(max-width: 800px) {
-    body {
-        overflow: auto;
-    }
-
-    .container {
-        height: auto;
-        min-height: 95vh;
-        grid-template-columns: 1fr;
-        margin: 2vh auto;
-    }
-
-    .sidebar {
-        border-right: none;
-        border-bottom: 1px solid #20252b;
-    }
-
-    .sidebar-bottom {
-        display: none;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .hero {
-        padding-top: 45px;
-    }
-}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+    html{scroll-behavior:auto}
+    .js .reveal{opacity:1;transform:none}
+  }
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<canvas id="stars" aria-hidden="true"></canvas>
 
-    <aside class="sidebar">
+<nav id="nav">
+  <a class="logo" href="#">ORBIT</a>
+  <ul>
+    <li><a href="#explore">探索</a></li>
+    <li><a href="#about">关于</a></li>
+  </ul>
+  <a class="nav-cta" href="#explore">开始旅程</a>
+</nav>
 
-        <div class="logo">
-            N<span>Ξ</span>URAL
+<main>
+  <!-- Hero -->
+  <section class="hero" style="padding-left:clamp(20px,5vw,64px);padding-right:clamp(20px,5vw,64px)">
+    <div class="hero-text">
+      <span class="pill"><i class="dot"></i>正在接收 38 光年外的信号</span>
+      <h1>在星辰之间<br /><span class="grad">寻找答案</span></h1>
+      <p class="lead">
+        ORBIT 是一个深空观测平台。我们用引力透镜凝视宇宙的褶皱，
+        把亿万年前出发的光，翻译成你今天能读懂的句子。
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#explore">
+          开始探索
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="#about">了解更多</a>
+      </div>
+    </div>
+
+    <div class="planet-wrap">
+      <div class="planet" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- 探索 -->
+  <section id="explore">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Explore</span>
+      <h2>我们如何阅读宇宙</h2>
+      <p>从一束光到一条结论，中间隔着几十亿年的沉默。我们做的，是把它听完。</p>
+    </div>
+
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <circle cx="12" cy="12" r="3.2"/>
+            <ellipse cx="12" cy="12" rx="9.5" ry="4.2" transform="rotate(-25 12 12)"/>
+          </svg>
         </div>
+        <h3>深空观测</h3>
+        <p>追踪数百万光年外的星系旋臂，记录每一次亮度波动背后的故事——那可能是一颗恒星的诞生，也可能是一场安静的告别。</p>
+      </article>
 
-        <div class="status">
-            <div class="status-title">SYSTEM STATUS</div>
-            <div class="online">
-                <div class="dot"></div>
-                ALL SYSTEMS OPERATIONAL
-            </div>
+      <article class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M3 20c6.5-1.2 11.4-6 12.6-12.4"/>
+            <circle cx="17.5" cy="5.2" r="2.3"/>
+            <circle cx="3.4" cy="20" r="1.5"/>
+          </svg>
         </div>
+        <h3>引力导航</h3>
+        <p>借助行星的引力弹弓，让探测器以最少的燃料走最远的路。在太空里，聪明的路线比强大的引擎更值钱。</p>
+      </article>
 
-        <div class="nav">
-            <button class="active">01 / OVERVIEW</button>
-            <button>02 / INTELLIGENCE</button>
-            <button>03 / NETWORK</button>
-            <button>04 / PROCESSES</button>
-            <button>05 / ARCHIVE</button>
+      <article class="card reveal">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+            <path d="M5 19a10 10 0 0 1 0-14"/>
+            <path d="M9 16a5.5 5.5 0 0 1 0-8"/>
+            <circle cx="13.8" cy="12" r="1.7" fill="currentColor" stroke="none"/>
+          </svg>
         </div>
+        <h3>星际通信</h3>
+        <p>把信息编码进极微弱的电磁波，穿越尘埃与辐射。抵达时它已经老了 38 年，但依然完整、清晰、可读。</p>
+      </article>
+    </div>
+  </section>
 
-        <div class="sidebar-bottom">
-            NODE: SYD-07<br>
-            BUILD: 2026.10.07<br>
-            PROTOCOL: NX-9<br>
-            CONNECTION: ENCRYPTED
-        </div>
+  <!-- 关于 / 统计 -->
+  <section id="about">
+    <div class="sec-head reveal">
+      <span class="eyebrow">About</span>
+      <h2>用光年丈量的浪漫</h2>
+      <p>我们相信，人类对宇宙的好奇心，本身就是这个物种最动人的部分。</p>
+    </div>
 
-    </aside>
+    <div class="stats">
+      <div class="reveal">
+        <span class="stat-num" data-count="1200" data-suffix="+">0</span>
+        <span class="stat-label">已确认的系外行星</span>
+      </div>
+      <div class="reveal">
+        <span class="stat-num" data-count="38" data-suffix=" 光年">0</span>
+        <span class="stat-label">最远信号接收距离</span>
+      </div>
+      <div class="reveal">
+        <span class="stat-num" data-count="99" data-suffix=".98%">0</span>
+        <span class="stat-label">观测数据完整率</span>
+      </div>
+    </div>
+  </section>
+</main>
 
-
-    <main class="main">
-
-        <div class="topbar">
-            <div class="breadcrumb">
-                ROOT / <b>SYSTEM</b> / OVERVIEW
-            </div>
-
-            <div class="clock" id="clock">
-                00:00:00
-            </div>
-        </div>
-
-
-        <section class="hero">
-
-            <div class="kicker">
-                ARTIFICIAL INTELLIGENCE // CONTROL LAYER
-            </div>
-
-            <h1>
-                THINK<br>
-                <span>BEYOND.</span>
-            </h1>
-
-            <div class="subtitle">
-                A minimal interface for observing the invisible layer
-                between information and action. No noise. No decoration.
-                Just signal.
-            </div>
-
-        </section>
-
-
-        <section class="grid">
-
-            <div class="card">
-                <div class="card-label">
-                    COGNITIVE LOAD
-                </div>
-
-                <div class="card-value green">
-                    87.42%
-                </div>
-
-                <div class="card-info">
-                    ▲ 4.21% FROM PREVIOUS CYCLE
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="card-label">
-                    ACTIVE NODES
-                </div>
-
-                <div class="card-value">
-                    1,284
-                </div>
-
-                <div class="card-info">
-                    GLOBAL DISTRIBUTION / 42 REGIONS
-                </div>
-            </div>
-
-
-            <div class="card">
-                <div class="card-label">
-                    LATENCY
-                </div>
-
-                <div class="card-value">
-                    13<span style="font-size:14px">ms</span>
-                </div>
-
-                <div class="card-info">
-                    RESPONSE CHANNEL / STABLE
-                </div>
-            </div>
-
-        </section>
-
-
-        <section class="terminal">
-
-            <div class="terminal-head">
-                LIVE SYSTEM OUTPUT
-            </div>
-
-            <div class="terminal-body" id="terminal">
-
-                <div class="line">
-                    [20:14:01]
-                    <span class="green">SYSTEM</span>
-                    neural layer initialized
-                </div>
-
-                <div class="line">
-                    [20:14:03]
-                    <span class="green">NETWORK</span>
-                    1284 nodes synchronized
-                </div>
-
-                <div class="line">
-                    [20:14:07]
-                    <span class="green">CORE</span>
-                    inference engine ready
-                </div>
-
-                <div class="line">
-                    [20:14:11]
-                    <span class="green">MEMORY</span>
-                    cache integrity 100%
-                </div>
-
-                <div class="line">
-                    [20:14:15]
-                    <span class="green">SYSTEM</span>
-                    waiting for input...
-                </div>
-
-                <div class="line">
-                    <span class="white">_</span>
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
+<footer>
+  <div class="brand">ORBIT</div>
+  <div>© 2025 ORBIT · 把亿万年外的光，翻译成今天的句子</div>
+</footer>
 
 <script>
+/* ============ 星空 ============ */
+(function () {
+  const cv = document.getElementById('stars');
+  const ctx = cv.getContext('2d');
+  let W = 0, H = 0, stars = [];
+  let mx = 0, my = 0, tx = 0, ty = 0;
 
-/* 实时时钟 */
-function updateClock() {
-    const now = new Date();
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    cv.width = Math.floor(W * dpr);
+    cv.height = Math.floor(H * dpr);
+    cv.style.width = W + 'px';
+    cv.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
 
-    const h = String(now.getHours()).padStart(2, "0");
-    const m = String(now.getMinutes()).padStart(2, "0");
-    const s = String(now.getSeconds()).padStart(2, "0");
+  function build() {
+    const count = Math.round(Math.min(300, Math.max(90, (W * H) / 11000)));
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      const z = Math.random() * 0.85 + 0.15;
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        z: z,
+        r: (0.4 + Math.random() * 1.0) * z * 1.7,
+        tw: Math.random() * Math.PI * 2,
+        ts: 0.006 + Math.random() * 0.02,
+        vy: 0.02 + Math.random() * 0.11,
+        hue: Math.random() < 0.78 ? null : (Math.random() < 0.5 ? '103,232,249' : '167,139,250')
+      });
+    }
+  }
 
-    document.getElementById("clock").textContent =
-        `${h}:${m}:${s}`;
-}
+  window.addEventListener('mousemove', function (e) {
+    mx = (e.clientX / W - 0.5) * 2;
+    my = (e.clientY / H - 0.5) * 2;
+  }, { passive: true });
 
-setInterval(updateClock, 1000);
-updateClock();
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    tx += (mx - tx) * 0.045;
+    ty += (my - ty) * 0.045;
 
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.tw += s.ts;
+      s.y -= s.vy * s.z;
+      if (s.y < -6) { s.y = H + 6; s.x = Math.random() * W; }
 
-/* 左侧导航 */
-document.querySelectorAll(".nav button").forEach(button => {
+      const a = 0.22 + Math.abs(Math.sin(s.tw)) * 0.78;
+      const px = s.x + tx * s.z * 26;
+      const py = s.y + ty * s.z * 26;
 
-    button.addEventListener("click", () => {
+      ctx.beginPath();
+      ctx.arc(px, py, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = s.hue
+        ? 'rgba(' + s.hue + ',' + (a * 0.85).toFixed(3) + ')'
+        : 'rgba(233,237,247,' + (a * 0.9).toFixed(3) + ')';
+      ctx.fill();
 
-        document
-            .querySelectorAll(".nav button")
-            .forEach(x => x.classList.remove("active"));
+      if (s.r > 1.6) {
+        const rad = s.r * 3.4;
+        const g = ctx.createRadialGradient(px, py, 0, px, py, rad);
+        g.addColorStop(0, s.hue
+          ? 'rgba(' + s.hue + ',' + (a * 0.18).toFixed(3) + ')'
+          : 'rgba(233,237,247,' + (a * 0.16).toFixed(3) + ')');
+        g.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(px, py, rad, 0, Math.PI * 2);
+        ctx.fillStyle = g;
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
 
-        button.classList.add("active");
+  window.addEventListener('resize', resize);
+  resize();
+  loop();
+})();
 
-        addTerminal(
-            "USER",
-            `interface switched to ${button.textContent}`
-        );
+/* ============ 导航滚动状态 ============ */
+(function () {
+  const nav = document.getElementById('nav');
+  function onScroll() {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
 
+/* ============ 滚动揭示 ============ */
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry, i) {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const siblings = Array.from(el.parentElement.children).indexOf(el);
+        el.style.transitionDelay = Math.min(siblings, 5) * 90 + 'ms';
+        el.classList.add('in');
+        io.unobserve(el);
+      }
     });
+  }, { threshold: 0.14, rootMargin: '0px 0px -60px 0px' });
 
+  items.forEach(function (el) { io.observe(el); });
+})();
+
+/* ============ 卡片光晕跟随 ============ */
+document.querySelectorAll('.card').forEach(function (card) {
+  card.addEventListener('mousemove', function (e) {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
 });
 
+/* ============ 数字滚动 ============ */
+(function () {
+  const nums = document.querySelectorAll('[data-count]');
+  if (!nums.length) return;
 
-/* Terminal 动态输出 */
-function addTerminal(type, message) {
+  function animate(el) {
+    const target = parseFloat(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1500;
+    const start = performance.now();
 
-    const terminal = document.getElementById("terminal");
-
-    const time = new Date().toLocaleTimeString();
-
-    const line = document.createElement("div");
-
-    line.className = "line";
-
-    line.innerHTML = `
-        [${time}]
-        <span class="green">${type}</span>
-        ${message}
-    `;
-
-    terminal.appendChild(line);
-
-    while (terminal.children.length > 8) {
-        terminal.removeChild(terminal.firstChild);
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      let text;
+      if (target >= 1000) {
+        text = Math.round(val).toLocaleString('en-US');
+      } else {
+        text = String(Math.round(val));
+      }
+      el.textContent = text + suffix;
+      if (p < 1) requestAnimationFrame(step);
     }
-}
+    requestAnimationFrame(step);
+  }
 
+  if (!('IntersectionObserver' in window)) {
+    nums.forEach(animate);
+    return;
+  }
 
-/* 偶尔制造一点系统活动 */
-const messages = [
-    ["CORE", "optimizing inference graph"],
-    ["NETWORK", "synchronization heartbeat"],
-    ["MEMORY", "allocating temporary context"],
-    ["SYSTEM", "background process completed"],
-    ["NODE", "new connection established"]
-];
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
 
-setInterval(() => {
-
-    const item =
-        messages[Math.floor(Math.random() * messages.length)];
-
-    addTerminal(item[0], item[1]);
-
-}, 3500);
-
+  nums.forEach(function (el) { io.observe(el); });
+})();
 </script>
-
 </body>
 </html>
