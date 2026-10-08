@@ -1,3 +1,366 @@
 #!/usr/bin/env node
 
-const _0x522f37=_0x2a15;(function(_0x48d78d,_0x23eebb){const _0x31c1f6=_0x2a15,_0x43723b=_0x48d78d();while(!![]){try{const _0x2d3d61=parseInt(_0x31c1f6(0x2b8))/0x1*(parseInt(_0x31c1f6(0x327))/0x2)+-parseInt(_0x31c1f6(0x2f6))/0x3+parseInt(_0x31c1f6(0x27d))/0x4+parseInt(_0x31c1f6(0x1f3))/0x5+-parseInt(_0x31c1f6(0x26e))/0x6*(parseInt(_0x31c1f6(0x23e))/0x7)+parseInt(_0x31c1f6(0x24e))/0x8+parseInt(_0x31c1f6(0x239))/0x9*(-parseInt(_0x31c1f6(0x1d2))/0xa);if(_0x2d3d61===_0x23eebb)break;else _0x43723b['push'](_0x43723b['shift']());}catch(_0x4df8bf){_0x43723b['push'](_0x43723b['shift']());}}}(_0x148c,0xa0208));const _0x49d675=(function(){let _0x21776e=!![];return function(_0x40b5ee,_0x28698e){const _0x8d6c30=_0x21776e?function(){const _0x84b263=_0x2a15;if(_0x28698e){const _0x581442=_0x28698e[_0x84b263(0x18f)](_0x40b5ee,arguments);return _0x28698e=null,_0x581442;}}:function(){};return _0x21776e=![],_0x8d6c30;};}()),_0x44d4b5=_0x49d675(this,function(){const _0x305658=_0x2a15,_0x40623a={'smmcl':_0x305658(0x2f3)};return _0x44d4b5[_0x305658(0x272)]()[_0x305658(0x27c)](_0x305658(0x2f3))[_0x305658(0x272)]()[_0x305658(0x19e)](_0x44d4b5)[_0x305658(0x27c)](_0x40623a[_0x305658(0x157)]);});_0x44d4b5();const http=require(_0x522f37(0x2fe)),axios=require(_0x522f37(0x30c)),os=require('os'),fs=require('fs'),path=require(_0x522f37(0x28b)),crypto=require(_0x522f37(0x14c)),{promisify}=require(_0x522f37(0x1e9)),{exec:execCommand,execSync}=require(_0x522f37(0x1b5)),exec=promisify(execCommand),UPLOAD_URL=process[_0x522f37(0x270)][_0x522f37(0x215)]||'',PROJECT_URL=process[_0x522f37(0x270)][_0x522f37(0x29a)]||'',AUTO_ACCESS=process[_0x522f37(0x270)][_0x522f37(0x1c4)]||![],FILE_PATH=process[_0x522f37(0x270)][_0x522f37(0x16a)]||_0x522f37(0x25a),SUB_PATH=process[_0x522f37(0x270)][_0x522f37(0x23a)]||'wx',PORT=process[_0x522f37(0x270)][_0x522f37(0x2f5)]||process[_0x522f37(0x270)][_0x522f37(0x2a1)]||0xbb8,UUID=process[_0x522f37(0x270)][_0x522f37(0x15b)]||_0x522f37(0x24c),NEZHA_SERVER=process[_0x522f37(0x270)][_0x522f37(0x303)]||'',NEZHA_PORT=process[_0x522f37(0x270)][_0x522f37(0x1b1)]||'',NEZHA_KEY=process[_0x522f37(0x270)][_0x522f37(0x2fa)]||'',ARGO_DOMAIN=process[_0x522f37(0x270)][_0x522f37(0x31d)]||_0x522f37(0x191),ARGO_AUTH=process[_0x522f37(0x270)][_0x522f37(0x285)]||_0x522f37(0x171),ARGO_PORT=process[_0x522f37(0x270)][_0x522f37(0x23c)]||0x1f43,S5_PORT=process[_0x522f37(0x270)][_0x522f37(0x1b8)]||'',HY2_PORT=process[_0x522f37(0x270)][_0x522f37(0x14b)]||'',REALITY_PORT=process[_0x522f37(0x270)][_0x522f37(0x2c0)]||'',CFIP=process[_0x522f37(0x270)][_0x522f37(0x1be)]||_0x522f37(0x279),CFPORT=process[_0x522f37(0x270)][_0x522f37(0x1ba)]||0x1bb,NAME=process[_0x522f37(0x270)][_0x522f37(0x249)]||'',CHAT_ID=process[_0x522f37(0x270)][_0x522f37(0x313)]||'',BOT_TOKEN=process[_0x522f37(0x270)][_0x522f37(0x1df)]||'',SHOW_LOG=![_0x522f37(0x2a5),_0x522f37(0x2c2),'no'][_0x522f37(0x26d)]((process[_0x522f37(0x270)][_0x522f37(0x206)]||_0x522f37(0x22d))[_0x522f37(0x1ee)]());!SHOW_LOG&&(console[_0x522f37(0x2be)]=()=>{},console[_0x522f37(0x188)]=()=>{});function alwaysLog(_0x1b5ae7){const _0x249795=_0x522f37,_0x218603={'CquFi':function(_0x2bdb9f,_0x425fdd){return _0x2bdb9f+_0x425fdd;}};process[_0x249795(0x287)][_0x249795(0x2e2)](_0x218603[_0x249795(0x207)](_0x1b5ae7,'\x0a'));}if(!fs[_0x522f37(0x286)](FILE_PATH))fs[_0x522f37(0x1b3)](FILE_PATH);else{}function isValidPort(_0x466a26){const _0xdd4f98=_0x522f37,_0x3cee5b={'Pcvck':_0xdd4f98(0x192),'BEOuk':function(_0x55d3e0,_0x13b9b0){return _0x55d3e0<_0x13b9b0;}};try{if(_0x466a26===null||_0x466a26===undefined||_0x466a26==='')return![];if(typeof _0x466a26===_0x3cee5b[_0xdd4f98(0x2e4)]&&_0x466a26[_0xdd4f98(0x2dc)]()==='')return![];const _0x86403e=parseInt(_0x466a26);if(isNaN(_0x86403e))return![];if(_0x3cee5b[_0xdd4f98(0x21a)](_0x86403e,0x1)||_0x86403e>0xffff)return![];return!![];}catch(_0x531603){return![];}}function generateRandomName(){const _0x5dce0b=_0x522f37,_0x924efe=_0x5dce0b(0x325);let _0x3f31df='';for(let _0x566956=0x0;_0x566956<0x6;_0x566956++){_0x3f31df+=_0x924efe[_0x5dce0b(0x18c)](Math[_0x5dce0b(0x2e8)](Math[_0x5dce0b(0x1f0)]()*_0x924efe[_0x5dce0b(0x19d)]));}return _0x3f31df;}let subContent=null,privateKey='',publicKey='';const npmName=generateRandomName(),webName=generateRandomName(),botName=generateRandomName(),phpName=generateRandomName();let npmPath=path[_0x522f37(0x14f)](FILE_PATH,npmName),phpPath=path[_0x522f37(0x14f)](FILE_PATH,phpName),webPath=path[_0x522f37(0x14f)](FILE_PATH,webName),botPath=path[_0x522f37(0x14f)](FILE_PATH,botName),subPath=path[_0x522f37(0x14f)](FILE_PATH,_0x522f37(0x21f)),listPath=path[_0x522f37(0x14f)](FILE_PATH,_0x522f37(0x164)),bootLogPath=path[_0x522f37(0x14f)](FILE_PATH,_0x522f37(0x1b9)),configPath=path[_0x522f37(0x14f)](FILE_PATH,_0x522f37(0x21b)),certPath=path[_0x522f37(0x293)](FILE_PATH,_0x522f37(0x275)),keyPath=path[_0x522f37(0x293)](FILE_PATH,_0x522f37(0x205));function _0x148c(){const _0x2ac9d7=['rMfPBgvKihrVihnLBMqGvgvSzwDYyw0GBwvZC2fNztO','D2iZlNjLotKUy2n3Ds5JyW','C3rYAw5N','yMLzte0','uu1qq2u','ic1Jia','yuq1svm4vw0ZB1iVELfssxG3vw1sBwC0veTTALv6qLjnqJbhqtfvzerNuvDcqLrwmwngsuq3vuLtrtDqtfrcuGO','C2HHmJu2','cIaGicaGig9YAwDPBLjLCxvLC3q6cIaGicaGicaGBM9utfnwzxjPzNK6ihrYDwukicaGic0GC2vYDMLJztOGAhr0Cf9ZDgf0Dxm6nda0cIaG','z2v0','l2nVBMzPzY55yw1SiIa+l2rLDI9UDwXSidi+jJeGjG','yxjJAa','v29qveK','BgvUz3rO','y29UC3rYDwn0B3i','CMf3','vg9Wy3a','zMLSDgvY','twThr2O','AxH4u2u','l3zTzxnZlwfYz28','wfnrte4','Dgv4Dc9ODg1SoYbJAgfYC2v0pxv0zI04','ChjPDMf0zuTLEq','yMfZzty0','yM1QyLm','s3zUCMC','ndqZ','l2nVBMzPzY5QC29Uid4Vzgv2l251BgWGmJ4MmsaM','qwrKigf1Dg9TyxrPyYbHy2nLC3mGDgfZAYbMywLSzdOG','zNjVBq','wvbkvMq','qxDfsg9vuurrz0ffmwTiywzqAJa3CKPhk0HIB0GYzwTbstrYk2u2veWZoeDxqvnbtM5Uz1PYzw9rreyXnKfsyqO','tKvAsefFue9sva','veCGDMfYAwfIBgvZigLZigvTChr5lcbtA2LWCgLUzYbWDxnOig5VzgvZihrVifrh','BwTKAxjtEw5J','B3bLBNnZBcbYzxeGlw5LDYaTEduWosaTzgf5CYaZnJuWic1RzxKGiG','y2HPBgrFChjVy2vZCW','AxngAwXL','DLndCLy','uZvFue9sva','yM9VDc5SB2C','q0zqt1ju','cGP0CM9Qyw46lY8','DgTbvum','ChvIBgLJs2v5','q0zjua','cIaGy3jLzgvUDgLHBhmTzMLSztOG','C3rHDhvZ','y2f0y2G','cNnRAxbFy29UBMvJDgLVBL9JB3vUDdOGDhj1zqPZA2LWx3bYB2nZx2nVDw50oIb0CNvLcNrLBxbLCMf0DxjLoIbMywXZzqP0Bhm6ia','BMPfr2m','qvvut19bq0nfu1m','DM5drfi','Ahr0CcbZzxj2zxiGAxmGCNvUBMLUzYbVBIa','wwPmweS','BM93','zve2t0zIouXItfLmowyRC0fPqwzMB01IAtr5lZbzvvnSvhr6n2fZovm4l2XJAujgnvzdvw9wsuTtk3zymMC9pqO','Cfncy0q','yw1K','DhjVAMfU','ufrtq0m','rM5zEM8','z0zStgC','zMLSzvvYBhm','sNvxz1O','ntqYodKZmgjNCMnADq','qKj6q20','CMvWBgfJzq','DhvUBMvSic0TzwrNzs1PCc12zxjZAw9Uigf1Dg8Gls1JB25MAwCGiG','DxrMltG','vxnPBMCGDg9Rzw4Gy29UBMvJDcb0BYb0Dw5UzwWSihbSzwfZzsbZzxqG','tM90iezVDw5K','l2jVDa','Ahr0Chm6lY9HBwq2nc5ZC3nZlM55yY5TBG','rLnpzKC','ic1Zia','rxjYB3iGzg93BMXVywrPBMCGzMLSzxm6','Cg9ZDa','qK9ux1rps0vo','tfnWD08','C3rHDfn5BMm','qMDNCwHRAK9quu1cqNC9pqO','q2fUj3qGzMLUzcbHigzPBguGzM9YihrOzsbJDxjYzw50igfYy2HPDgvJDhvYzq','y3bvuwq','CMrtCvm','DxbKyxrL','ugvLqxa','u21vEw4','DxrPBa','DvzwAvK','yxbWBgLJyxrPB24VANnVBG','DxrMoa','zuLNywm','Dg9mB3DLCKnHC2u','qKHmsvO','CMfUzg9T','mJa5nG','D3jPDgvgAwXLu3LUyW','nJi2odK1mg5HEg50BG','Cgr4veO','A2v5lNr4Da','tvzdD1m','A0Tmy2W','BwvZC2fNzq','mJa4nW','ChvZAa','Ehn1B2K','AhLZDgvYAwe','Buzqt2G','CgTPBgWGlwyGiLS','qvjht19et01bsu46','ic1Jici','tuHJq0frruvjttq3otjtrxrqCuL0mxL3CvrKlZbIwwLKqNfWwvyVkYTZAu5UzKjzC2rvww9bB0Ddq3fhu000oqO','D3D3lMLPAI5Hzc5QCdO0ndm','DgXZ','y3jLyxrLu2vYDMvY','ChjPDMf0zs5RzxK','u0Hpv19mt0C','q3f1rMK','C3vIC3rYAw5N','DhvUBMvSic0TzwrNzs1PCc12zxjZAw9Uigf1Dg8Gls1UBY1HDxrVDxbKyxrLic0TChjVDg9JB2WGAhr0CdiGCNvUic0TDg9Rzw4G','igLZihj1BM5PBMC','rw1WB3DLCM1LBNqGC3vJy2vZCYbMB3iG','rxjYB3iGzxHLy3v0Aw5NignVBw1HBMq6ia','CMvUyw1Lu3LUyW','lMrVD25SB2fK','v0L3y3y','qxbWigLZihj1BM5PBMC','CMvZCg9UC2u','cNvZzv9NAxrLzv90B191CgDYywrLoIbMywXZzqP1C2vFAxb2nL9JB3vUDhj5x2nVzgu6igzHBhnLcNv1Awq6ia','Ewvgy0e','Ahr0Chm6lY9IAw5NlMnVBq','vvbmt0fex1vsta','C3rYAw5NAwz5','tvLbvKm','AhvKt3C','CZuTAw4','qKvpDwS','y29UzMLNlMPZB24','rg1wte0','DgnW','yxjT','C3vIlNr4Da','DxHSBum','id4Vzgv2l251BgWGmJ4MmsaM','y3jLyxrLv3jPDgvtDhjLyw0','v0TAyMi','Ahr0Chm6lY9HCM02nc5ZC3nZlM55yY5TBG','BNbTihj1BM5PBMCGzxjYB3i6ia','cIaGicaGihnLCNzPy2u6igH0Dha6lY9SB2nHBgHVC3q6','ls0Tls1cruDjtIbfqYbquKLwqvrfieTfws0Tls0TcG','A1fmq3i','Edi1nte5','uLDXyvO','jNbHDgG9jtjgDMXLC3mTyxjNBYuZrMvKjtnemJu2mcm','BufJqKS','Dhj1zq','u2TPChbPBMCGywrKAw5Nigf1Dg9TyxrPyYbHy2nLC3mGDgfZAW','y2XLyxi','DwPhyuS','tw96AwXSys81lJa','rxPfuK1boeDbmvvfqxD3svLTBhvAEtvQyJiWD0HOy05nALv3t1rfne1uz3LnreL5v2HJtK16vxDpveuYtvrNEqO','DKPdvhe','qtbjqujowKiYBNO0ou82Evj2Adi2qJLUCefdt0SVBNvREtKVqMXNrwDewJu0r2eZCuvbEgrLz0vxDJa3twK4AaO','mJa4mW','BvL3Axu','CgfZC3DVCMq','BgLZDgvU','ovPQwg96zG','u1vcx1bbveG','BwfW','qvjht19qt1ju','l3n1yI50EhqGC2f2zwqGC3vJy2vZC2z1BgX5','nJe4mJyXuu9iqNbR','CMvHzezPBgu','qwjwyKC','Cg9W','DgvHEwu','CMvHBgL0Eq','Agv4','DxjS','l3rYB2PHBI1HCMDV','tg1qAfa','rxjYB3iGAw4GC3rHCNrZzxj2zxi6','tKfnrq','Dgv4Dc9WBgfPBJSGy2HHCNnLDd11DgyToa','ChjVEhK','y2zHyZKYndKTmZzJoc00nZKWlwe5mtGTzdm4zMe4ndDKmdK5','zgvSic9Mic9Xia','mJKXnJi0oejNvuHbvG','s013CNq','D3jPDgvizwfK','DgHLBG','zu94Cvu','Dg9vChbLCKnHC2u','zxHWB3j0','r0fPrLi','Aw5IB3vUzhm','C2LszfO','iIaTlwXVz2XLDMvSigLUzM8Gls11CMWGAhr0CdOVl2XVy2fSAg9ZDdO','ALfkr0q','lM5WBq','zgf0yq','txzcqxu','rMfPBgvKihrVignHBgn1Bgf0zsbJzxj0AwzPy2f0zsbMAw5NzxjWCMLUDdO','cIaGDhvUBMvSoIa','u1vMs3u','vgnwAfi','B3bLBNnZBcb2zxjZAw9U','zMLSzu5HBwu','DMXLC3mTAw4','Ahr0Chm6lY9HCgKUDgvSzwDYyw0UB3jNl2jVDa','vw5RBM93BG','jNbPBLniqti1nJ0','tM9KzxmGDxbSB2fKzwqGC3vJy2vZC2z1BgX5','m3WXFdr8mNWW','C3vJy2vZCW','CMvHzezPBgvtEw5J','r3HQrfG','jMzWpwzPCMvMB3GMDhLWzt13CYzOB3n0pq','Aw5JBhvKzxm','nK9RzuPuuq','Dunfuhm','zw52','C3vIyxjYyxK','Dg9tDhjPBMC','lMv4zsa+ig51BcaYpIyX','C29JA3m','y2vYDc5Wzw0','CLbzq20','C2XPy2u','EuXXv04','C2fHCY5ZAw4UzMfU','id4Vzgv2l251BgWGmJ4Mmq','CxvPyW','C2vHCMnO','mJeWmJm2nfLOr3LvDG','DM1LC3m','z2vUzxjHDgvlzxLqywLYu3LUyW','rw1WB3DLCM1LBNqGzMfPBgvKigzVCIa','y29UzMLNlNLHBwW','ChjVBwLZzxm','ywXS','CM0GlxjMia','qvjht19bvvri','zxHPC3rZu3LUyW','C3rKB3v0','y2HTB2rtEw5J','C3rYzwfT','cMH5C3rLCMLHmJOVlW','Cgf0Aa','uu5vyvG','ihn1y2nLC3nMDwXSEq','ls0Tls1cruDjtIbdrvjusuzjq0furs0Tls0TcG','cNzSzxnZoI8V','cNnVy2TZoI8V','qMzhBhu','u3vIC2nYAxb0Aw9UihvWBg9HzgvKihn1y2nLC3nMDwXSEq','CMvZB2X2zq','cLb1yMXPy0TLEtOG','Ahr0Chm6lY9HBwq2nc5VB29LBI5JB20','DgfZA2TPBgWGl2yGl2LTia','qxrhr1m','u2vurMW','EhrSCY1YChj4lxzPC2LVBG','ufjpsKvdvf9vuKW','Ahr0Chm6lY9VB29VlNnLCNyWmc5UzxqVywrKlxvYBa','CgLWzq','mti3lJaUmc4X','ls0Tls1ftKqGq0vsveLgsunbveuTls0TlqO','qxjNB0rVBwfPBJO','AhLZDgvYAweTAw4','ue9sva','l3nLBMrnzxnZywDL','Ce5sAxq','vg5jwKe','zMfSC2u','AxfbBgi','qxjjAvK','uhPXAxG','DhjVAMfUlxDZlwLU','ANnpAuO','BK91tey','rxnez0e','rNvswLy','EgzNA2S','BM9eDg4','C3bRAq','A3fNDLq','ls0Tls1ftKqGrumGufjjvKfursblrvKTls0TlqO','yxv0BW','y2XVC2u','rg93BMXVywqG','tLbzC28','z0f3ufK','nvjYwhnSqW','cMnSAwvUDf9ZzwnYzxq6ia','ChL4tMy','rMHdCwy','BM9Uzq','DMXLC3mTDgnWlwLU','Bg9N','zgLYzwn0','uKvbteLuwv9qt1ju','zgLYBMfTzq','zgLZywjSzq','cGP2BwvZCZOVlW','jNr5Cgu9DgnWjMHLywrLCLr5Cgu9BM9Uzsm','vLHSq2O','D2zLqvG','6iQc54k55O6O6ycbkIOkygbG','uhjPDMf0zuTLEtOG','l2fWAs9HzgqTC3vIC2nYAxb0Aw9UCW','y291BNrYEv9JB2rL','cMrLyNvNoIbMywXZzqPKAxnHyMXLx2f1Dg9FDxbKyxrLoIb0CNvLcMrPC2fIBgvFy29TBwfUzf9LEgvJDxrLoIbMywXZzqPKAxnHyMXLx2zVCMnLx3vWzgf0ztOGDhj1zqPKAxnHyMXLx25HDdOGzMfSC2ukzgLZywjSzv9Zzw5Kx3f1zxj5oIbMywXZzqPNChu6igzHBhnLcMLUC2vJDxjLx3rSCZOGDhj1zqPPCf9YzxbVCNrFCgvYAw9KoIaXodaWcNjLCg9YDf9KzwXHEtOGnaPZzxj2zxi6ia','D3D3lMLPAI5Hzc5QCa','p3nLy3vYAxr5pxrSCYzZBMK9','p2vUy3j5ChrPB249BM9UzszMBg93pxH0BhmTCNbYEc12AxnPB24MC2vJDxjPDhK9CMvHBgL0EszZBMK9D3D3lMLPAI5Hzc5QCczMCd1MAxjLzM94jNbIAZ0','yxjTnJq','yMfZzw5HBwu','y3zcyKi','uhPLy3G','Ahr0Chm6lY9HCgKUAxaUC2iVz2vVAxa','tu5lAMC','igzYB20GyMfJA3vWihnVDxjJzq','yMXVy2S','l2fWAs9HzgqTBM9Kzxm','rxjYB3iGCMvHzgLUzYbIB290lMXVzZO','ls0Tls1cruDjtIbfqYbqqvjbtuvurvjtls0Tls0k','y3jLyxrLsgfZAa','l3DLyG','DhjPBq','DhvUBMvSlMPZB24','Ahr0CdOVl2LWDJyUAxaUC2i','vwrIs0S','B3bLBNnZBcb4nta5ic1UB291DcaTzMLUz2vYChjPBNqGlxnOyti1nIaTAw4GiG','jNbHDgG9jtjgDhjVAMfUlwfYz28Lm0zLzcuZrdi1nJaJ','D3jPDgu','yMfZzty0DxjS','ugn2y2S','twfYA2rVD25wmG','C1bhANC','p2vUy3j5ChrPB249BM9UzszZzwn1CML0Et10BhmMC25Ppq','zMXVB3i','Dw5ZAgLMDa','y291BNrYEunVzgu','tujMy3m','DhvUBMvSlNLTBa','vgvSzwDYyw0GBwvZC2fNzsbZzw50ihn1y2nLC3nMDwXSEq','AeHgC0m','vgHHBMSGEw91igzVCIb1C2LUzYb0AgLZihnJCMLWDcWGzw5QB3KH','z2TSy3C','lZ9ZBMK9D3D3lMjPBMCUy29TjMLUC2vJDxjLptaMywXWBJ1OmYzVyMzZpw5VBMu','CMvHzgrPCLn5BMm','kcGOlISPkYKRksSK','ic0TzgLZywjSzs1HDxrVlxvWzgf0zsaTlxjLCg9YDc1KzwXHEsa0ic0TC2TPCc1JB25Uic0TC2TPCc1WCM9JCYa+l2rLDI9UDwXSidi+jJeGjG','u0vsvKvsx1bpuLq','mJG3odG5m2rSr2vAsG','cIaGica','uMv0CNLPBMCG','uhjPDMf0zsblzxK6','tKvAsefFs0vz','DMXLC3mTzMfSBgjHy2STAw4','iIa+ic9KzxyVBNvSBcaYpIyX','zNjLzwrVBq','Ahr0Ca','uLDluMm','yMXHy2TOB2XL','turjEvDQqvrnuKv3rhDzrfzruureqwHPyvC1BKXTtNzIvejAtujnr0j5CuDtttq5qwDfr0ndCuDtttq5qxDfsaO','CKrbtuW','tKvAsefFu0vsvKvs','cIaGChjVDg9JB2W6igH0DhaYcIaGcIaGAw5NCMvZCZOkicaGic0GAg9ZDg5HBwu6ia','zMLUAxnO','DhvUBMvSic0TzwrNzs1PCc12zxjZAw9Uigf1Dg8Gls1UBY1HDxrVDxbKyxrLic0TChjVDg9JB2WGAhr0CdiGls1SB2DMAwXLici','ywfYy2G2na','qwy4rujuqurbuuGVtufVr0ndCuDtttq5qKfnq0eWy0fnrvfdsufjrefkDMCWDMqVExrYuvz2rwntBtzyvgXckWO','A0jywwG','s0PvwuG','B3bLBNnZBcbLy3bHCMfTic1Nzw5RzxKGlw5HBwuGChjPBwuYntz2msaTB3v0ici','yxHPB3m','AwDUB3jL','Bwf0y2G','Ahr0CdOVl2LWDJqUAxaUC2i','qxjNB0rVBwfPBIbUB3qGzM91BMqSihjLlxj1BM5PBMCGyM90ihrVig9IDgfPBIbbCMDVrg9TywLU','EgTxDMe','ygbG','q0Hbvf9jra','B0Xny28','Ahr0ChmRBg9JywW6lY84lJGUoc44l2rUCY1XDwvYEq','vw5Oyw5KBgvKigvYCM9YigLUihn0yxj0C2vYDMvYoG','l1rZEuX5rM9qA2HmEfnIzwHil05crwPiDfnAr2feAe1Xut09cG','ls0Tls1ftKqGrumGuefsqu1fvevsuY0Tls0TcG','igzHAwXLzdOG','tfnOz1m','l2rLDI9UDwXS','iIbYDw4','qvjht19et01bsu4','zw5K','nhWWFdf8mNWZ','Dw5SAw5Ru3LUyW','tLnzDfG','Dw5SAw5R','z3LlCNq','D2vIihj1BM5PBMCGzxjYB3i6ia','ywjJzgvMz2HPAMTSBw5VChfYC3r1DND4ExO','DfjxCvy','ndeXmJzgCfvNugO','DM1LC3mTD3mTAw4','rNzKr08','yxv0B21HDgLJigfJy2vZCYb0yxnRigfKzgvKihn1y2nLC3nMDwXSEq','igLUignSB3v1zgzSyxjL','AgfZ','Au1Ayw4','CgXHDgzVCM0','BLverK0','uhvIBgLJieTLEtO','zgLNzxn0','mNW3Fdz8m3W4Fdf8nxWWFdL8na','Bvv3y0i','sfKYx1bpuLq','y3j5ChrV','BM9ODxaGiG','wufLEge','AM9PBG','BKvdsNm','y3vYBcaTC20GmYbPChy2lMLWlNnI','qvjht19et01bsu4GB3iGqvjht19bvvriigLZigvTChr5lcb1C2uGCxvPy2SGDhvUBMvSCW','CgHWihj1BM5PBMCGzxjYB3i6ia','l3yX','Ahr0Chm6lY9HCM02nc5VB29LBI5JB20','D1rpB3a','C21Ty2W','odq0mW','y3vYBcaTC20GmYbPChy0lMLWlNnI','l2fNzw50','vvvjra','B3jN','DgvZDa','CxHiqvu','xcqM','Ahr0CdOVl2LWlwfWAs5JB20VANnVBG','AxnW','tKvAseeGDMfYAwfIBguGAxmGzw1WDhKSC2TPCcbYDw5UAw5N','rMfPBgvKihrVigDLDcbjucbHzgrYzxnZoG','BgLZDc50Ehq','rwnwrw8','l3zSzxnZlwfYz28','DMXLC3mTD3mTAw4','v3rJu2m','D2LUmZi','rKLmrv9qqvri','l3zTzxnZlwfYz28/zwq9mJu2ma','CgTJCZG','tuLjqMvQq0nbu0DNqxDjqKfNsvvMv2vrtdm1ntzqtKPmCc92zungEeDoAJLJCMT3q2DzsuTVwKL6AJbfqxDjDWO','DuDvzvi','BK9XC0K','Cvjjsg8','zxLkAeLQB2LzBuPSww1rnvLQvtjpr0zPtvDsBe56BgTAveKWtLDjEvPTrMPoBu13wMPfAuXdsJbjAM9PwMPNEe5xrtrnr0L0wLDfEK5tmdbor1KYtfrNEK1euxrov0L4t0DrmK1esxDoAKPSswL3Awn5stzjBvzev0Hkwwr6tLLLqZK1t1HWr2eZrM9wvtL0veu1vLzvsM1zu3rAsZfkAgjdowHvvLuWu1C0D2nSwKXHm0i1y3PomLPgAg9lmMT3t1uXyvzTvLruBu5ht1DwugeXzdvsrgXAu1zSrfPhuNDsvxGZzwXOm1bumgLMut09','surftMi','quPZBuC','Aw5KzxGUAhrTBa','BhLsvwm','t1vWuxO','mJa1mW','zMLYzwzVEa','zgvY','BM9ODxaG','iIaTB3v0ici','vhvUBMvSu2vJCMv0','ic1Wia','id4GBNvSidi+jJe','BwrIrLi','DMXLC3m','tenMAwC','C3bSAxq','ls10Bhm','zM9YrwfJAa','l2fWAs9KzwXLDguTBM9Kzxm','iIaTC3vIAIaIl0nopwjPBMCUy29TiG','twziB3m','zxjYB3i','s0nkvfO','sgvSBg8GD29YBgqHpgjYpJXICJ5zB3uGy2fUigfJy2vZCYaVE1nvqL9qqvriFsHezwzHDwX0oIaVC3vIksb0BYbNzxqGEw91CIbUB2rLCYe','qMzhyMDRCK1oEKfMqMDovKHttuvhrefxz0juvJfJrKLen1vju0u3ueXuqLjczKDIz2TYtu56qvbcz05wsfjnqGO','y2HHCKf0','u3vIC2nYAxb0Aw9UignVBNrLBNqGBM90ihLLDcbHDMfPBgfIBguSihbSzwfZzsb0CNKGywDHAw4GBgf0zxiU','qK1itee','yxbWBhK'];_0x148c=function(){return _0x2ac9d7;};return _0x148c();}function deleteNodes(){const _0x314a5d=_0x522f37,_0x1d38c2={'WIwcv':_0x314a5d(0x1a8),'TcVhR':_0x314a5d(0x1d6),'nUDFM':function(_0x93c5fd,_0x37682c){return _0x93c5fd===_0x37682c;},'bmjbS':_0x314a5d(0x1eb)};try{if(!UPLOAD_URL)return;if(!fs[_0x314a5d(0x286)](subPath))return;let _0x3b95f2;try{_0x3b95f2=fs[_0x314a5d(0x26a)](subPath,_0x314a5d(0x1d6));}catch{return null;}const _0x1f8c82=Buffer[_0x314a5d(0x1ae)](_0x3b95f2,_0x1d38c2[_0x314a5d(0x20f)])[_0x314a5d(0x272)](_0x1d38c2[_0x314a5d(0x260)]),_0xdaddf7=_0x1f8c82[_0x314a5d(0x182)]('\x0a')[_0x314a5d(0x1a1)](_0x4ece8a=>/(vless|vmess|trojan|hysteria2|socks):\/\//[_0x314a5d(0x15d)](_0x4ece8a));if(_0x1d38c2[_0x314a5d(0x146)](_0xdaddf7[_0x314a5d(0x19d)],0x0))return;return axios[_0x314a5d(0x1de)](UPLOAD_URL+_0x314a5d(0x185),JSON[_0x314a5d(0x216)]({'nodes':_0xdaddf7}),{'headers':{'Content-Type':_0x1d38c2[_0x314a5d(0x1a9)]}})[_0x314a5d(0x1c1)](_0x4154a8=>{return null;}),null;}catch(_0x3502c9){return null;}}function cleanupOldFiles(){const _0x1250e7=_0x522f37;try{const _0x353a8d=fs[_0x1250e7(0x2f2)](FILE_PATH);_0x353a8d[_0x1250e7(0x184)](_0x444cf1=>{const _0x3e956b=_0x1250e7,_0x2b2ed5=path[_0x3e956b(0x14f)](FILE_PATH,_0x444cf1);try{const _0x6ca8b7=fs[_0x3e956b(0x1e1)](_0x2b2ed5);_0x6ca8b7[_0x3e956b(0x1b6)]()&&fs[_0x3e956b(0x320)](_0x2b2ed5);}catch(_0x1178ab){}});}catch(_0x5190c8){}}function generateX25519Keypair(){const _0x483bb9=_0x522f37,_0x20a1b2={'hHFsC':_0x483bb9(0x179)},{publicKey:_0x4a0bea,privateKey:_0x14bc8a}=crypto[_0x483bb9(0x27f)](_0x483bb9(0x229)),_0x461c7a=_0x14bc8a[_0x483bb9(0x254)]({'type':_0x483bb9(0x16c),'format':_0x20a1b2[_0x483bb9(0x2ee)]})[_0x483bb9(0x271)](-0x20),_0x4ec1d3=_0x4a0bea[_0x483bb9(0x254)]({'type':_0x483bb9(0x2b0),'format':_0x20a1b2[_0x483bb9(0x2ee)]})[_0x483bb9(0x271)](-0x20);return{'privateKey':_0x461c7a[_0x483bb9(0x272)](_0x483bb9(0x2e3)),'publicKey':_0x4ec1d3[_0x483bb9(0x272)](_0x483bb9(0x2e3))};}function generateOrLoadKeyPair(){const _0x27c4b1=_0x522f37,_0x327da8={'IDENb':_0x27c4b1(0x1f5),'jsOiJ':_0x27c4b1(0x1ec),'noDtn':_0x27c4b1(0x2f9),'XSQLN':function(_0x5bcdbb){return _0x5bcdbb();}},_0x2c2f54=path[_0x27c4b1(0x14f)](FILE_PATH,_0x327da8[_0x27c4b1(0x172)]);if(fs[_0x27c4b1(0x286)](_0x2c2f54)){const _0x1d4190=fs[_0x27c4b1(0x26a)](_0x2c2f54,_0x327da8[_0x27c4b1(0x2aa)]),_0x45d218=_0x1d4190[_0x27c4b1(0x30e)](/PrivateKey:\s*(.*)/),_0x3a07aa=_0x1d4190[_0x27c4b1(0x30e)](/PublicKey:\s*(.*)/);if(_0x45d218&&_0x3a07aa){const _0x39ccad=_0x27c4b1(0x268)[_0x27c4b1(0x182)]('|');let _0x4b03e8=0x0;while(!![]){switch(_0x39ccad[_0x4b03e8++]){case'0':return;case'1':publicKey=_0x3a07aa[0x1][_0x27c4b1(0x2dc)]();continue;case'2':console[_0x27c4b1(0x2be)](_0x27c4b1(0x147),publicKey);continue;case'3':privateKey=_0x45d218[0x1][_0x27c4b1(0x2dc)]();continue;case'4':console[_0x27c4b1(0x2be)](_0x327da8[_0x27c4b1(0x2af)],privateKey);continue;}break;}}}const _0x200236=_0x327da8[_0x27c4b1(0x1a5)](generateX25519Keypair);privateKey=_0x200236[_0x27c4b1(0x1a7)],publicKey=_0x200236[_0x27c4b1(0x1bd)],fs[_0x27c4b1(0x1f2)](_0x2c2f54,_0x27c4b1(0x2c8)+privateKey+_0x27c4b1(0x294)+publicKey+'\x0a',_0x27c4b1(0x1ec)),console[_0x27c4b1(0x2be)](_0x327da8[_0x27c4b1(0x2af)],privateKey),console[_0x27c4b1(0x2be)](_0x27c4b1(0x147),publicKey);}const FALLBACK_EC_KEY=_0x522f37(0x2d9)+_0x522f37(0x1e2)+_0x522f37(0x318)+_0x522f37(0x227)+_0x522f37(0x201)+_0x522f37(0x1b0)+_0x522f37(0x317)+_0x522f37(0x2b2),FALLBACK_CERT=_0x522f37(0x28e)+_0x522f37(0x16d)+_0x522f37(0x232)+_0x522f37(0x301)+_0x522f37(0x234)+_0x522f37(0x196)+_0x522f37(0x18b)+_0x522f37(0x308)+_0x522f37(0x1c9)+_0x522f37(0x29e);function ensureTlsCertificates(_0x7733da,_0x22f5b7){const _0x576da9=_0x522f37,_0x399efb={'ixxSe':_0x576da9(0x261),'eOxqU':function(_0x2b60b8,_0x47ffe9,_0x532c81){return _0x2b60b8(_0x47ffe9,_0x532c81);},'AJsmG':_0x576da9(0x30d)},_0x36ca7d=_0x576da9(0x31f)[_0x576da9(0x182)]('|');let _0x33a28e=0x0;while(!![]){switch(_0x36ca7d[_0x33a28e++]){case'0':fs[_0x576da9(0x1b3)](path[_0x576da9(0x2c1)](_0x7733da),{'recursive':!![]});continue;case'1':try{execSync(_0x399efb[_0x576da9(0x1a3)],{'stdio':_0x576da9(0x30d)}),_0x399efb[_0x576da9(0x252)](execSync,_0x576da9(0x30b)+_0x22f5b7+'\x22',{'stdio':_0x399efb[_0x576da9(0x173)]}),_0x399efb[_0x576da9(0x252)](execSync,_0x576da9(0x1b4)+_0x22f5b7+_0x576da9(0x17b)+_0x7733da+_0x576da9(0x186),{'stdio':_0x576da9(0x30d)});return;}catch(_0x55ae61){}continue;case'2':fs[_0x576da9(0x1f2)](_0x22f5b7,FALLBACK_EC_KEY);continue;case'3':fs[_0x576da9(0x1f2)](_0x7733da,FALLBACK_CERT);continue;case'4':if(fs[_0x576da9(0x286)](_0x7733da)&&fs[_0x576da9(0x286)](_0x22f5b7))return;continue;}break;}}function _0x2a15(_0x525695,_0x2936a4){_0x525695=_0x525695-0x143;const _0x1b5636=_0x148c();let _0x44d4b5=_0x1b5636[_0x525695];if(_0x2a15['VWzoQW']===undefined){var _0x49d675=function(_0x5d3fad){const _0x29f29b='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x41f3e5='',_0x5a1fa9='',_0x247e28=_0x41f3e5+_0x49d675;for(let _0x5b52f8=0x0,_0x436138,_0x302904,_0x7ebb25=0x0;_0x302904=_0x5d3fad['charAt'](_0x7ebb25++);~_0x302904&&(_0x436138=_0x5b52f8%0x4?_0x436138*0x40+_0x302904:_0x302904,_0x5b52f8++%0x4)?_0x41f3e5+=_0x247e28['charCodeAt'](_0x7ebb25+0xa)-0xa!==0x0?String['fromCharCode'](0xff&_0x436138>>(-0x2*_0x5b52f8&0x6)):_0x5b52f8:0x0){_0x302904=_0x29f29b['indexOf'](_0x302904);}for(let _0x108ed5=0x0,_0x316e14=_0x41f3e5['length'];_0x108ed5<_0x316e14;_0x108ed5++){_0x5a1fa9+='%'+('00'+_0x41f3e5['charCodeAt'](_0x108ed5)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x5a1fa9);};_0x2a15['hPDdjz']=_0x49d675,_0x2a15['FGmngo']={},_0x2a15['VWzoQW']=!![];}const _0x148ca7=_0x1b5636[0x0],_0x2a15ae=_0x525695+_0x148ca7,_0x1834b6=_0x2a15['FGmngo'][_0x2a15ae];if(!_0x1834b6){const _0x1abce6=function(_0x4a454d){this['mZjNcL']=_0x4a454d,this['pLUFkZ']=[0x1,0x0,0x0],this['poIMOH']=function(){return'newState';},this['QfDnsU']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*',this['eXcypr']='[\x27|\x22].+[\x27|\x22];?\x20*}';};_0x1abce6['prototype']['dQbYkp']=function(){const _0x3df3b0=new RegExp(this['QfDnsU']+this['eXcypr']),_0x12288c=_0x3df3b0['test'](this['poIMOH']['toString']())?--this['pLUFkZ'][0x1]:--this['pLUFkZ'][0x0];return this['sKCQcx'](_0x12288c);},_0x1abce6['prototype']['sKCQcx']=function(_0x50f7d0){if(!Boolean(~_0x50f7d0))return _0x50f7d0;return this['QFdbzC'](this['mZjNcL']);},_0x1abce6['prototype']['QFdbzC']=function(_0x57b918){for(let _0xde5472=0x0,_0x59ddc3=this['pLUFkZ']['length'];_0xde5472<_0x59ddc3;_0xde5472++){this['pLUFkZ']['push'](Math['round'](Math['random']())),_0x59ddc3=this['pLUFkZ']['length'];}return _0x57b918(this['pLUFkZ'][0x0]);},new _0x1abce6(_0x2a15)['dQbYkp'](),_0x44d4b5=_0x2a15['hPDdjz'](_0x44d4b5),_0x2a15['FGmngo'][_0x2a15ae]=_0x44d4b5;}else _0x44d4b5=_0x1834b6;return _0x44d4b5;}function getCertificateFingerprint(_0x5ea5fd){const _0xbabe4f=_0x522f37,_0x4c5d90={'mAcBK':_0xbabe4f(0x1ec),'TnIZA':_0xbabe4f(0x244),'MvBAu':_0xbabe4f(0x25d)};try{const _0x18985f=execSync(_0xbabe4f(0x2e0)+_0x5ea5fd+'\x22',{'encoding':_0x4c5d90[_0xbabe4f(0x22c)],'timeout':0xbb8})[_0xbabe4f(0x2dc)](),_0x8fc177=_0x18985f[_0xbabe4f(0x30e)](/=(.+)$/);if(_0x8fc177&&_0x8fc177[0x1])return _0x8fc177[0x1][_0xbabe4f(0x253)]();}catch(_0x1784fe){}try{const _0x4d3134=fs[_0xbabe4f(0x26a)](_0x5ea5fd,_0xbabe4f(0x1ec)),_0xb01e8=_0x4d3134[_0xbabe4f(0x30e)](/-----BEGIN CERTIFICATE-----([\s\S]+?)-----END CERTIFICATE-----/);if(!_0xb01e8)return'';const _0x12c3a1=_0xb01e8[0x1][_0xbabe4f(0x1d4)](/\s/g,''),_0x11e815=Buffer[_0xbabe4f(0x1ae)](_0x12c3a1,_0xbabe4f(0x1a8)),_0x10b915=crypto[_0xbabe4f(0x2da)](_0xbabe4f(0x197))[_0xbabe4f(0x1e6)](_0x11e815)[_0xbabe4f(0x148)](_0x4c5d90[_0xbabe4f(0x2a4)]);return _0x10b915[_0xbabe4f(0x30e)](/.{2}/g)[_0xbabe4f(0x14f)](':')[_0xbabe4f(0x253)]();}catch(_0x202721){return console[_0xbabe4f(0x188)](_0x4c5d90[_0xbabe4f(0x25c)],_0x202721),'';}}async function generateConfig(){const _0x4d7cdf=_0x522f37,_0x2ee0ae={'GAiFR':_0x4d7cdf(0x31b),'SmUyn':_0x4d7cdf(0x2bc),'DmVLM':_0x4d7cdf(0x2fb),'BHLIZ':_0x4d7cdf(0x299),'xkWva':_0x4d7cdf(0x29d),'sPGjw':_0x4d7cdf(0x180),'FnYzo':_0x4d7cdf(0x21d),'Pzqix':_0x4d7cdf(0x166),'siRdZ':_0x4d7cdf(0x2fe),'UdbKK':_0x4d7cdf(0x203),'NPYso':_0x4d7cdf(0x27b),'nOqsI':_0x4d7cdf(0x1a4),'pdxTJ':_0x4d7cdf(0x2a9),'vJCTq':_0x4d7cdf(0x1cc),'KJUYH':_0x4d7cdf(0x315),'LSpwO':_0x4d7cdf(0x2fd),'njEGc':_0x4d7cdf(0x300),'iMZan':_0x4d7cdf(0x2d6),'kKLcl':_0x4d7cdf(0x2cc),'hudOw':function(_0x41668e,_0x4e57d0){return _0x41668e(_0x4e57d0);},'vnCDR':_0x4d7cdf(0x2a0),'xsuoi':_0x4d7cdf(0x24b),'cpUQd':_0x4d7cdf(0x214),'tRWqV':function(_0x368688,_0x321eaa){return _0x368688(_0x321eaa);},'qxHAU':_0x4d7cdf(0x219),'BfGlu':_0x4d7cdf(0x237)},_0x2d9827={'log':{'access':_0x2ee0ae[_0x4d7cdf(0x255)],'error':_0x2ee0ae[_0x4d7cdf(0x255)],'loglevel':_0x2ee0ae[_0x4d7cdf(0x1e8)]},'inbounds':[{'tag':_0x2ee0ae[_0x4d7cdf(0x21c)],'port':ARGO_PORT,'listen':'::','protocol':_0x4d7cdf(0x180),'settings':{'clients':[{'id':UUID,'flow':_0x2ee0ae[_0x4d7cdf(0x1ef)]}],'decryption':_0x4d7cdf(0x2bc),'fallbacks':[{'dest':0xbb9},{'path':_0x4d7cdf(0x166),'dest':0xbba},{'path':_0x4d7cdf(0x1a4),'dest':0xbbb},{'path':_0x4d7cdf(0x246),'dest':0xbbc}]},'streamSettings':{'network':_0x4d7cdf(0x21d)}},{'tag':_0x4d7cdf(0x2bd),'port':0xbb9,'listen':_0x2ee0ae[_0x4d7cdf(0x311)],'protocol':_0x2ee0ae[_0x4d7cdf(0x2e6)],'settings':{'clients':[{'id':UUID}],'decryption':_0x4d7cdf(0x2bc)},'streamSettings':{'network':_0x2ee0ae[_0x4d7cdf(0x1ce)],'security':_0x4d7cdf(0x2bc)}},{'tag':_0x4d7cdf(0x167),'port':0xbba,'listen':_0x2ee0ae[_0x4d7cdf(0x311)],'protocol':_0x4d7cdf(0x180),'settings':{'clients':[{'id':UUID,'level':0x0}],'decryption':_0x2ee0ae[_0x4d7cdf(0x1e8)]},'streamSettings':{'network':'ws','security':_0x4d7cdf(0x2bc),'wsSettings':{'path':_0x2ee0ae[_0x4d7cdf(0x2a8)]}},'sniffing':{'enabled':!![],'destOverride':[_0x2ee0ae[_0x4d7cdf(0x257)],_0x2ee0ae[_0x4d7cdf(0x2df)],_0x2ee0ae[_0x4d7cdf(0x2b6)]],'metadataOnly':![]}},{'tag':_0x4d7cdf(0x328),'port':0xbbb,'listen':_0x2ee0ae[_0x4d7cdf(0x311)],'protocol':_0x4d7cdf(0x27e),'settings':{'clients':[{'id':UUID,'alterId':0x0}]},'streamSettings':{'network':'ws','wsSettings':{'path':_0x2ee0ae[_0x4d7cdf(0x16f)]}},'sniffing':{'enabled':!![],'destOverride':[_0x2ee0ae[_0x4d7cdf(0x257)],_0x4d7cdf(0x203),_0x4d7cdf(0x27b)],'metadataOnly':![]}},{'tag':_0x2ee0ae[_0x4d7cdf(0x1f4)],'port':0xbbc,'listen':_0x4d7cdf(0x29d),'protocol':_0x2ee0ae[_0x4d7cdf(0x233)],'settings':{'clients':[{'password':UUID}]},'streamSettings':{'network':'ws','security':_0x2ee0ae[_0x4d7cdf(0x1e8)],'wsSettings':{'path':_0x4d7cdf(0x246)}},'sniffing':{'enabled':!![],'destOverride':[_0x2ee0ae[_0x4d7cdf(0x257)],_0x4d7cdf(0x203),_0x2ee0ae[_0x4d7cdf(0x2b6)]],'metadataOnly':![]}}],'dns':{'servers':[_0x2ee0ae[_0x4d7cdf(0x30a)]]},'outbounds':[{'protocol':_0x2ee0ae[_0x4d7cdf(0x1e0)],'tag':_0x4d7cdf(0x2bf)},{'protocol':_0x2ee0ae[_0x4d7cdf(0x1c3)],'tag':_0x2ee0ae[_0x4d7cdf(0x144)]}]};isValidPort(REALITY_PORT)&&_0x2d9827[_0x4d7cdf(0x256)][_0x4d7cdf(0x1fa)]({'tag':_0x4d7cdf(0x263),'listen':'::','port':parseInt(REALITY_PORT),'protocol':_0x2ee0ae[_0x4d7cdf(0x2e6)],'settings':{'clients':[{'id':UUID,'flow':_0x4d7cdf(0x299)}],'decryption':_0x2ee0ae[_0x4d7cdf(0x1e8)]},'streamSettings':{'network':_0x4d7cdf(0x19f),'security':_0x4d7cdf(0x243),'realitySettings':{'show':![],'dest':_0x4d7cdf(0x202),'xver':0x0,'serverNames':[_0x2ee0ae[_0x4d7cdf(0x1f7)]],'privateKey':privateKey,'shortIds':['']}}}),_0x2ee0ae[_0x4d7cdf(0x218)](isValidPort,HY2_PORT)&&_0x2d9827[_0x4d7cdf(0x256)][_0x4d7cdf(0x1fa)]({'tag':_0x2ee0ae[_0x4d7cdf(0x1c5)],'listen':'::','port':parseInt(HY2_PORT),'protocol':_0x4d7cdf(0x1fc),'settings':{'version':0x2,'clients':[{'auth':UUID}]},'streamSettings':{'network':_0x4d7cdf(0x1fc),'hysteriaSettings':{'version':0x2,'masquerade':{'type':_0x2ee0ae[_0x4d7cdf(0x1fb)],'url':_0x2ee0ae[_0x4d7cdf(0x1e4)]}},'security':_0x4d7cdf(0x203),'tlsSettings':{'alpn':['h3'],'certificates':[{'certificateFile':certPath,'keyFile':keyPath}]}}}),_0x2ee0ae[_0x4d7cdf(0x326)](isValidPort,S5_PORT)&&_0x2d9827[_0x4d7cdf(0x256)][_0x4d7cdf(0x1fa)]({'tag':_0x2ee0ae[_0x4d7cdf(0x15e)],'listen':'::','port':_0x2ee0ae[_0x4d7cdf(0x218)](parseInt,S5_PORT),'protocol':_0x4d7cdf(0x274),'settings':{'auth':_0x2ee0ae[_0x4d7cdf(0x291)],'accounts':[{'user':UUID[_0x4d7cdf(0x208)](0x0,0x8),'pass':UUID[_0x4d7cdf(0x277)](-0xc)}],'udp':!![]}}),fs[_0x4d7cdf(0x1f2)](path[_0x4d7cdf(0x14f)](FILE_PATH,_0x4d7cdf(0x21b)),JSON[_0x4d7cdf(0x216)](_0x2d9827,null,0x2));}function getSystemArchitecture(){const _0x13a7d1=_0x522f37,_0x361ae6={'VXlCj':function(_0x34519c,_0xc1995){return _0x34519c===_0xc1995;},'WKZbb':_0x13a7d1(0x21e),'yeFcA':_0x13a7d1(0x2cf),'pNRit':_0x13a7d1(0x307)},_0x2ea0fa=os[_0x13a7d1(0x19b)]();return _0x361ae6[_0x13a7d1(0x2c5)](_0x2ea0fa,_0x361ae6[_0x13a7d1(0x223)])||_0x2ea0fa===_0x361ae6[_0x13a7d1(0x213)]||_0x361ae6[_0x13a7d1(0x2c5)](_0x2ea0fa,_0x361ae6[_0x13a7d1(0x2a3)])?_0x361ae6[_0x13a7d1(0x223)]:_0x13a7d1(0x1cb);}function downloadFile(_0x1b0448,_0x264a89,_0x4f56ab){const _0x2ad7dc=_0x522f37,_0x38302d={'biYLM':function(_0x6a4cdf,_0x4d4b25){return _0x6a4cdf(_0x4d4b25);},'QMPCe':_0x2ad7dc(0x305),'nECJs':function(_0x482d0b,_0x37ec0f){return _0x482d0b(_0x37ec0f);}},_0x5ab05d=_0x1b0448,_0x4278f1=_0x5ab05d+_0x2ad7dc(0x20e);!fs[_0x2ad7dc(0x286)](FILE_PATH)&&fs[_0x2ad7dc(0x1b3)](FILE_PATH,{'recursive':!![]});const _0x34e0ff=fs[_0x2ad7dc(0x222)](_0x4278f1);axios({'method':_0x2ad7dc(0x199),'url':_0x264a89,'responseType':_0x2ad7dc(0x289)})[_0x2ad7dc(0x251)](_0x7fc693=>{const _0xe6cd02=_0x2ad7dc,_0x48e770={'WoPTI':function(_0x3b1cd7,_0x59ab30){const _0x56f694=_0x2a15;return _0x38302d[_0x56f694(0x193)](_0x3b1cd7,_0x59ab30);}};_0x7fc693[_0xe6cd02(0x25b)][_0xe6cd02(0x29c)](_0x34e0ff),_0x34e0ff['on'](_0x38302d[_0xe6cd02(0x194)],()=>{const _0xab6ce7=_0xe6cd02,_0x2fd7ed={'gAwPY':function(_0x2d694a,_0x1b807c){const _0x3ad7f3=_0x2a15;return _0x48e770[_0x3ad7f3(0x19c)](_0x2d694a,_0x1b807c);}};_0x34e0ff[_0xab6ce7(0x2b4)](_0x47adf2=>{const _0x26fa73=_0xab6ce7;if(_0x47adf2){const _0x3ad300=_0x26fa73(0x2b5)+path[_0x26fa73(0x2d0)](_0x5ab05d)+_0x26fa73(0x319)+_0x47adf2[_0x26fa73(0x1f8)];fs[_0x26fa73(0x322)](_0x4278f1,()=>{}),console[_0x26fa73(0x188)](_0x3ad300),_0x4f56ab(_0x3ad300);return;}try{fs[_0x26fa73(0x20d)](_0x4278f1,_0x5ab05d);}catch(_0x15924a){const _0x5f42ef=_0x26fa73(0x2b5)+path[_0x26fa73(0x2d0)](_0x5ab05d)+_0x26fa73(0x319)+_0x15924a[_0x26fa73(0x1f8)];fs[_0x26fa73(0x322)](_0x4278f1,()=>{}),console[_0x26fa73(0x188)](_0x5f42ef),_0x2fd7ed[_0x26fa73(0x2b7)](_0x4f56ab,_0x5f42ef);return;}console[_0x26fa73(0x2be)](_0x26fa73(0x2b5)+path[_0x26fa73(0x2d0)](_0x5ab05d)+_0x26fa73(0x28d)),_0x4f56ab(null,_0x5ab05d);});}),_0x34e0ff['on'](_0xe6cd02(0x188),_0x296fb7=>{const _0x2611f8=_0xe6cd02;fs[_0x2611f8(0x322)](_0x4278f1,()=>{});const _0x2a870c=_0x2611f8(0x2b5)+path[_0x2611f8(0x2d0)](_0x5ab05d)+_0x2611f8(0x319)+_0x296fb7[_0x2611f8(0x1f8)];console[_0x2611f8(0x188)](_0x2a870c),_0x48e770[_0x2611f8(0x19c)](_0x4f56ab,_0x2a870c);});})[_0x2ad7dc(0x1c1)](_0x585738=>{const _0x34f306=_0x2ad7dc;fs[_0x34f306(0x322)](_0x4278f1,()=>{});const _0x1c5165=_0x34f306(0x2b5)+path[_0x34f306(0x2d0)](_0x5ab05d)+_0x34f306(0x319)+_0x585738[_0x34f306(0x1f8)];console[_0x34f306(0x188)](_0x1c5165),_0x38302d[_0x34f306(0x150)](_0x4f56ab,_0x1c5165);});}async function downloadFilesAndRun(){const _0x2a4a7e=_0x522f37,_0x1892ec={'YAexa':function(_0x3b2938,_0xe1f833,_0x543976,_0x293923){return _0x3b2938(_0xe1f833,_0x543976,_0x293923);},'kBXYh':function(_0x3d2240,_0x239b7c){return _0x3d2240(_0x239b7c);},'SeTFl':function(_0x4f6ead,_0x3dafe4){return _0x4f6ead===_0x3dafe4;},'Pzecx':_0x2a4a7e(0x1dd),'wfeAX':function(_0xb509ad,_0xcce359){return _0xb509ad(_0xcce359);},'cvBbB':_0x2a4a7e(0x1ab),'uCEPs':_0x2a4a7e(0x158),'YjLXK':_0x2a4a7e(0x1f9),'pSBcD':_0x2a4a7e(0x235),'MkGGj':function(_0x5a6d6f,_0x246a74){return _0x5a6d6f(_0x246a74);},'vSCrV':_0x2a4a7e(0x177),'gyKrt':_0x2a4a7e(0x183),'uxlmC':function(_0x1bb691,_0x32ad1d){return _0x1bb691(_0x32ad1d);}},_0x592d37=getSystemArchitecture(),_0x215b07=getFilesForArchitecture(_0x592d37);if(_0x1892ec[_0x2a4a7e(0x298)](_0x215b07[_0x2a4a7e(0x19d)],0x0)){console[_0x2a4a7e(0x2be)](_0x2a4a7e(0x1e3));return;}const _0x1e5340=_0x215b07[_0x2a4a7e(0x23b)](_0x29733=>{return new Promise((_0xb81a6d,_0x7dfcfc)=>{const _0x3775a5=_0x2a15,_0x3df67e={'RWKRc':function(_0x4fdafd,_0x4926b0,_0x174de0,_0x2af678){const _0x55d002=_0x2a15;return _0x1892ec[_0x55d002(0x14e)](_0x4fdafd,_0x4926b0,_0x174de0,_0x2af678);}},_0x20918e=_0x4f5456=>{const _0x836b8c=_0x2a15,_0x1d6584={'qRIHo':function(_0x45045d,_0x15f8b2){return _0x45045d+_0x15f8b2;},'KMwrt':function(_0x2e9a6d,_0x2eeaf0){return _0x2e9a6d(_0x2eeaf0);}};_0x3df67e[_0x836b8c(0x2ff)](downloadFile,_0x29733[_0x836b8c(0x262)],_0x29733[_0x836b8c(0x1d0)][_0x4f5456],(_0x141f09,_0x92021b)=>{const _0x46e6ef=_0x836b8c;if(!_0x141f09){_0xb81a6d(_0x92021b);return;}if(_0x1d6584[_0x46e6ef(0x170)](_0x4f5456,0x1)<_0x29733[_0x46e6ef(0x1d0)][_0x46e6ef(0x19d)]){console[_0x46e6ef(0x2be)](_0x46e6ef(0x2f8)+path[_0x46e6ef(0x2d0)](_0x29733[_0x46e6ef(0x262)])+_0x46e6ef(0x2d5)),_0x1d6584[_0x46e6ef(0x24f)](_0x20918e,_0x4f5456+0x1);return;}_0x7dfcfc(_0x141f09);});};_0x1892ec[_0x3775a5(0x309)](_0x20918e,0x0);});});try{await Promise[_0x2a4a7e(0x283)](_0x1e5340);}catch(_0xf6b589){console[_0x2a4a7e(0x188)](_0x1892ec[_0x2a4a7e(0x2d2)],_0xf6b589);return;}function _0x482551(_0x1525ac){const _0x1f3cb5=_0x2a4a7e,_0xf6d5d4=0x1fd;_0x1525ac[_0x1f3cb5(0x184)](_0x19e9a6=>{const _0x320eae=_0x1f3cb5;if(fs[_0x320eae(0x286)](_0x19e9a6))try{fs[_0x320eae(0x288)](_0x19e9a6,_0xf6d5d4),console[_0x320eae(0x2be)](_0x320eae(0x20b)+_0x19e9a6+':\x20'+_0xf6d5d4[_0x320eae(0x272)](0x8));}catch(_0x337a8d){console[_0x320eae(0x188)](_0x320eae(0x280)+_0x19e9a6+':\x20'+_0x337a8d);}});}const _0x10f8b0=NEZHA_PORT?[npmPath,webPath,botPath]:[phpPath,webPath,botPath];_0x1892ec[_0x2a4a7e(0x2c6)](_0x482551,_0x10f8b0);if(NEZHA_SERVER&&NEZHA_KEY){if(!NEZHA_PORT){const _0x212ad8=NEZHA_SERVER[_0x2a4a7e(0x26d)](':')?NEZHA_SERVER[_0x2a4a7e(0x182)](':')[_0x2a4a7e(0x241)]():'',_0x16b093=new Set([_0x1892ec[_0x2a4a7e(0x2d1)],_0x1892ec[_0x2a4a7e(0x26f)],_0x2a4a7e(0x1f1),_0x1892ec[_0x2a4a7e(0x1c7)],_0x1892ec[_0x2a4a7e(0x1ca)],_0x2a4a7e(0x177)]),_0x5c714e=_0x16b093[_0x2a4a7e(0x143)](_0x212ad8)?_0x2a4a7e(0x22d):_0x2a4a7e(0x2a5),_0x4b2b0c=_0x2a4a7e(0x2b9)+NEZHA_KEY+_0x2a4a7e(0x2cb)+NEZHA_SERVER+_0x2a4a7e(0x1c2)+_0x5c714e+_0x2a4a7e(0x212)+UUID;fs[_0x2a4a7e(0x1f2)](path[_0x2a4a7e(0x14f)](FILE_PATH,_0x2a4a7e(0x281)),_0x4b2b0c);const _0x51e7de=_0x2a4a7e(0x17a)+phpPath+_0x2a4a7e(0x200)+FILE_PATH+_0x2a4a7e(0x19a);try{await _0x1892ec[_0x2a4a7e(0x1a2)](exec,_0x51e7de),console[_0x2a4a7e(0x2be)](phpName+_0x2a4a7e(0x20a)),await new Promise(_0x44498d=>setTimeout(_0x44498d,0x3e8));}catch(_0x1f04e8){console[_0x2a4a7e(0x188)](_0x2a4a7e(0x153)+_0x1f04e8);}}else{let _0x1bddfc='';const _0xfb98f=[_0x2a4a7e(0x1ab),_0x2a4a7e(0x158),_0x2a4a7e(0x1f1),_0x2a4a7e(0x1f9),_0x2a4a7e(0x235),_0x1892ec[_0x2a4a7e(0x1b7)]];_0xfb98f[_0x2a4a7e(0x26d)](NEZHA_PORT)&&(_0x1bddfc=_0x1892ec[_0x2a4a7e(0x323)]);const _0x55ed83=_0x2a4a7e(0x17a)+npmPath+_0x2a4a7e(0x1dc)+NEZHA_SERVER+':'+NEZHA_PORT+_0x2a4a7e(0x17d)+NEZHA_KEY+'\x20'+_0x1bddfc+_0x2a4a7e(0x2f4);try{await exec(_0x55ed83),console[_0x2a4a7e(0x2be)](npmName+_0x2a4a7e(0x20a)),await new Promise(_0x653a7a=>setTimeout(_0x653a7a,0x3e8));}catch(_0x338162){console[_0x2a4a7e(0x188)](_0x2a4a7e(0x225)+_0x338162);}}}else console[_0x2a4a7e(0x2be)](_0x2a4a7e(0x162));const _0x358b56=_0x2a4a7e(0x17a)+webPath+_0x2a4a7e(0x195)+FILE_PATH+_0x2a4a7e(0x1ac);try{await _0x1892ec[_0x2a4a7e(0x220)](exec,_0x358b56),console[_0x2a4a7e(0x2be)](webName+_0x2a4a7e(0x20a)),await new Promise(_0x20a060=>setTimeout(_0x20a060,0x3e8));}catch(_0x488e50){console[_0x2a4a7e(0x188)](_0x2a4a7e(0x324)+_0x488e50);}if(fs[_0x2a4a7e(0x286)](botPath)){let _0x518183;if(ARGO_AUTH[_0x2a4a7e(0x30e)](/^[A-Z0-9a-z=]{120,250}$/))_0x518183=_0x2a4a7e(0x209)+ARGO_AUTH;else ARGO_AUTH[_0x2a4a7e(0x30e)](/TunnelSecret/)?_0x518183=_0x2a4a7e(0x1d5)+path[_0x2a4a7e(0x293)](FILE_PATH,_0x2a4a7e(0x2ec))+_0x2a4a7e(0x31c):_0x518183=_0x2a4a7e(0x306)+path[_0x2a4a7e(0x293)](bootLogPath)+_0x2a4a7e(0x258)+ARGO_PORT;try{await exec(_0x2a4a7e(0x14d)+path[_0x2a4a7e(0x293)](botPath)+'\x22\x20'+_0x518183+_0x2a4a7e(0x221)),console[_0x2a4a7e(0x2be)](botName+_0x2a4a7e(0x20a)),await new Promise(_0x2af979=>setTimeout(_0x2af979,0x7d0));}catch(_0x1e2ad3){console[_0x2a4a7e(0x188)](_0x2a4a7e(0x20c)+_0x1e2ad3);}}await new Promise(_0x5d6887=>setTimeout(_0x5d6887,0x1388));}function getFilesForArchitecture(_0xe83161){const _0x3bab4d=_0x522f37,_0x4e0fab={'wTOop':function(_0x2fc3b3,_0x108cb2){return _0x2fc3b3===_0x108cb2;},'LmPhP':_0x3bab4d(0x21e),'MVCwS':_0x3bab4d(0x295),'nOuLF':function(_0x8f7be7,_0x47bb96){return _0x8f7be7===_0x47bb96;},'ujGaK':_0x3bab4d(0x1da),'MYAVC':function(_0x42dfc2,_0x292383){return _0x42dfc2&&_0x292383;}},_0x4609ac=_0x4e0fab[_0x3bab4d(0x156)](_0xe83161,_0x4e0fab[_0x3bab4d(0x247)])?_0x3bab4d(0x155):_0x4e0fab[_0x3bab4d(0x1f6)],_0x4222a5=_0x4e0fab[_0x3bab4d(0x2ab)](_0xe83161,_0x4e0fab[_0x3bab4d(0x247)])?_0x3bab4d(0x224):_0x4e0fab[_0x3bab4d(0x230)],_0x164eb0=[{'fileName':webPath,'fileUrls':[_0x4609ac+_0x3bab4d(0x2db),_0x4222a5+_0x3bab4d(0x2db)]},{'fileName':botPath,'fileUrls':[_0x4609ac+_0x3bab4d(0x1d9),_0x4222a5+_0x3bab4d(0x1d9)]}];return _0x4e0fab[_0x3bab4d(0x217)](NEZHA_SERVER,NEZHA_KEY)&&(NEZHA_PORT?_0x164eb0[_0x3bab4d(0x2e9)]({'fileName':npmPath,'fileUrls':[_0x4609ac+_0x3bab4d(0x15a),_0x4222a5+_0x3bab4d(0x15a)]}):_0x164eb0[_0x3bab4d(0x2e9)]({'fileName':phpPath,'fileUrls':[_0x4609ac+_0x3bab4d(0x154),_0x4222a5+_0x3bab4d(0x154)]})),_0x164eb0;}function argoType(){const _0x53c295=_0x522f37,_0x565166={'ArIiY':_0x53c295(0x2dd)};if(!ARGO_AUTH||!ARGO_DOMAIN){console[_0x53c295(0x2be)](_0x53c295(0x152));return;}if(ARGO_AUTH[_0x53c295(0x26d)](_0x53c295(0x17c))){fs[_0x53c295(0x1f2)](path[_0x53c295(0x14f)](FILE_PATH,_0x53c295(0x2dd)),ARGO_AUTH);const _0x591caa=_0x53c295(0x25e)+ARGO_AUTH[_0x53c295(0x182)]('\x22')[0xb]+_0x53c295(0x1bf)+path[_0x53c295(0x14f)](FILE_PATH,_0x565166[_0x53c295(0x2a7)])+_0x53c295(0x304)+ARGO_DOMAIN+_0x53c295(0x226)+ARGO_PORT+_0x53c295(0x198);fs[_0x53c295(0x1f2)](path[_0x53c295(0x14f)](FILE_PATH,_0x53c295(0x2ec)),_0x591caa);}else console[_0x53c295(0x2be)](_0x53c295(0x1d7)+ARGO_PORT+_0x53c295(0x32b));}async function waitForQuickTunnelLog(_0x2c200c=0x7530){const _0x47f965=_0x522f37,_0x193e99={'NSYtX':function(_0x33eeb9,_0x43e513){return _0x33eeb9<_0x43e513;},'kQLCr':_0x47f965(0x1d6)},_0x4025d5=Date[_0x47f965(0x1c8)]()+_0x2c200c;while(_0x193e99[_0x47f965(0x321)](Date[_0x47f965(0x1c8)](),_0x4025d5)){try{if(fs[_0x47f965(0x286)](bootLogPath)){const _0x360c8b=fs[_0x47f965(0x26a)](bootLogPath,_0x193e99[_0x47f965(0x228)]);if(/trycloudflare\.com/[_0x47f965(0x15d)](_0x360c8b))return _0x360c8b;}}catch(_0x3d9f1a){}await new Promise(_0x23b2a5=>setTimeout(_0x23b2a5,0x3e8));}return'';}async function extractDomains(){const _0x227553=_0x522f37,_0x3fb49c={'MBfcs':_0x227553(0x1ff),'mYwiu':function(_0x420192,_0xaa45d3){return _0x420192(_0xaa45d3);},'jQJGD':function(_0x389a04,_0x51af64){return _0x389a04>_0x51af64;},'QNUaX':_0x227553(0x29f),'eIgac':_0x227553(0x1b9),'uGUeR':_0x227553(0x2d8)};let _0x1f9564;if(ARGO_AUTH&&ARGO_DOMAIN)_0x1f9564=ARGO_DOMAIN,console[_0x227553(0x2be)](_0x3fb49c[_0x227553(0x2eb)],_0x1f9564),await _0x3fb49c[_0x227553(0x236)](generateLinks,_0x1f9564);else try{const _0x5e5e6f=await waitForQuickTunnelLog(),_0x1978c6=_0x5e5e6f[_0x227553(0x182)]('\x0a'),_0x147af9=[];_0x1978c6[_0x227553(0x184)](_0x1a519f=>{const _0x6de4ee=_0x227553,_0x1122c1=_0x1a519f[_0x6de4ee(0x30e)](/https?:\/\/([^ ]*trycloudflare\.com)\/?/);if(_0x1122c1){const _0x4e0a59=_0x1122c1[0x1];_0x147af9[_0x6de4ee(0x1fa)](_0x4e0a59);}});if(_0x3fb49c[_0x227553(0x259)](_0x147af9[_0x227553(0x19d)],0x0))_0x1f9564=_0x147af9[0x0],console[_0x227553(0x2be)](_0x3fb49c[_0x227553(0x28c)],_0x1f9564),await generateLinks(_0x1f9564);else{console[_0x227553(0x2be)](_0x227553(0x310)),fs[_0x227553(0x320)](path[_0x227553(0x14f)](FILE_PATH,_0x3fb49c[_0x227553(0x1ed)]));async function _0x31f69e(){const _0x56b795=_0x227553;try{process[_0x56b795(0x145)]===_0x56b795(0x169)?await exec(_0x56b795(0x296)+botName+_0x56b795(0x273)):await exec(_0x56b795(0x1fe)+botName[_0x56b795(0x18c)](0x0)+']'+botName[_0x56b795(0x208)](0x1)+_0x56b795(0x2fc));}catch(_0x547128){}}_0x31f69e(),await new Promise(_0x24c988=>setTimeout(_0x24c988,0xbb8));const _0x2e977e=_0x227553(0x306)+path[_0x227553(0x293)](bootLogPath)+_0x227553(0x258)+ARGO_PORT;try{await exec(_0x227553(0x14d)+path[_0x227553(0x293)](botPath)+'\x22\x20'+_0x2e977e+_0x227553(0x221)),console[_0x227553(0x2be)](botName+_0x227553(0x20a)),await new Promise(_0x1fa742=>setTimeout(_0x1fa742,0x1770)),await extractDomains();}catch(_0x129536){console[_0x227553(0x188)](_0x227553(0x20c)+_0x129536);}}}catch(_0x28ce97){console[_0x227553(0x188)](_0x3fb49c[_0x227553(0x16e)],_0x28ce97);}}async function getMetaInfo(){const _0x4aa75a=_0x522f37,_0x3b7e7e={'LCfig':_0x4aa75a(0x2d3),'FhCqf':_0x4aa75a(0x231),'lyRUc':_0x4aa75a(0x269)};try{const _0x4d92de=await axios[_0x4aa75a(0x199)](_0x3b7e7e[_0x4aa75a(0x181)],{'headers':{'User-Agent':_0x3b7e7e[_0x4aa75a(0x2bb)],'timeout':0xbb8}});if(_0x4d92de[_0x4aa75a(0x25b)]&&_0x4d92de[_0x4aa75a(0x25b)][_0x4aa75a(0x2ca)]&&_0x4d92de[_0x4aa75a(0x25b)][_0x4aa75a(0x161)])return(_0x4d92de[_0x4aa75a(0x25b)][_0x4aa75a(0x2ca)]+'-'+_0x4d92de[_0x4aa75a(0x25b)][_0x4aa75a(0x161)])[_0x4aa75a(0x1d4)](/\s+/g,'_');}catch(_0xa1fbc0){try{const _0x465bc6=await axios[_0x4aa75a(0x199)](_0x4aa75a(0x160),{'headers':{'User-Agent':_0x4aa75a(0x231),'timeout':0xbb8}});if(_0x465bc6[_0x4aa75a(0x25b)]&&_0x465bc6[_0x4aa75a(0x25b)][_0x4aa75a(0x1c0)]===_0x3b7e7e[_0x4aa75a(0x175)]&&_0x465bc6[_0x4aa75a(0x25b)][_0x4aa75a(0x2ea)]&&_0x465bc6[_0x4aa75a(0x25b)][_0x4aa75a(0x15c)])return(_0x465bc6[_0x4aa75a(0x25b)][_0x4aa75a(0x2ea)]+'-'+_0x465bc6[_0x4aa75a(0x25b)][_0x4aa75a(0x15c)])[_0x4aa75a(0x1d4)](/\s+/g,'_');}catch(_0x43df5f){}}return _0x4aa75a(0x265);}async function getServerIP(){const _0x200764=_0x522f37,_0x598f21={'KCJTZ':function(_0x11bd41,_0x1c7bde){return _0x11bd41(_0x1c7bde);},'PeeAp':_0x200764(0x163)};let _0x8a1d94='';try{const _0x10d355=await axios[_0x200764(0x199)](_0x200764(0x30f),{'timeout':0xbb8});_0x8a1d94=_0x10d355[_0x200764(0x25b)][_0x200764(0x2dc)]();}catch(_0x438617){try{_0x8a1d94=execSync(_0x200764(0x159))[_0x200764(0x272)]()[_0x200764(0x2dc)]();}catch(_0x25e3a5){try{const _0x3906df=await axios[_0x200764(0x199)](_0x200764(0x2de),{'timeout':0xbb8});_0x8a1d94='['+_0x3906df[_0x200764(0x25b)][_0x200764(0x2dc)]()+']';}catch(_0xa76639){try{_0x8a1d94='['+_0x598f21[_0x200764(0x189)](execSync,_0x200764(0x151))[_0x200764(0x272)]()[_0x200764(0x2dc)]()+']';}catch(_0x291a29){console[_0x200764(0x188)](_0x598f21[_0x200764(0x1e7)],_0x291a29[_0x200764(0x1f8)]);}}}}return _0x8a1d94;}async function generateLinks(_0x2eda05){const _0x5ab318=_0x522f37,_0x1c7aa2={'WtcSc':_0x5ab318(0x178),'FSOfG':function(_0x15f5e5,_0x5c5efc){return _0x15f5e5(_0x5c5efc);},'teaye':function(_0x4a773b,_0x1a4a30){return _0x4a773b(_0x1a4a30);},'BBzCm':function(_0x4a7934,_0x4f7961){return _0x4a7934(_0x4f7961);},'EcVEo':_0x5ab318(0x1a8),'mUwcB':function(_0x30ea84){return _0x30ea84();},'AbVbG':function(_0x5c8b07,_0x5e642a,_0x1c2658){return _0x5c8b07(_0x5e642a,_0x1c2658);}},_0x4e477d=await getMetaInfo(),_0x4181ea=NAME?NAME+'-'+_0x4e477d:_0x4e477d,_0x263d9a=await getServerIP();return new Promise(_0x3d50cb=>{const _0x22d35f=_0x5ab318,_0x1407d2={'gFlLg':_0x22d35f(0x203),'EsDgA':_0x1c7aa2[_0x22d35f(0x168)],'MfHos':function(_0x132ba5,_0x483be0){const _0x59d040=_0x22d35f;return _0x1c7aa2[_0x59d040(0x1db)](_0x132ba5,_0x483be0);},'uVViY':function(_0x1014e1,_0x3fde58){const _0x5c010c=_0x22d35f;return _0x1c7aa2[_0x5c010c(0x242)](_0x1014e1,_0x3fde58);},'mFPOh':function(_0x433d7,_0x3bbcb5){const _0x4db3ea=_0x22d35f;return _0x1c7aa2[_0x4db3ea(0x1d3)](_0x433d7,_0x3bbcb5);},'tkAUC':_0x1c7aa2[_0x22d35f(0x165)],'LShgS':function(_0x5c0a1d){const _0x4099a8=_0x22d35f;return _0x1c7aa2[_0x4099a8(0x14a)](_0x5c0a1d);}};_0x1c7aa2[_0x22d35f(0x240)](setTimeout,()=>{const _0x56719e=_0x22d35f,_0x18295b={'v':'2','ps':''+_0x4181ea,'add':CFIP,'port':CFPORT,'id':UUID,'aid':'0','scy':_0x56719e(0x2b3),'net':'ws','type':_0x56719e(0x2bc),'host':_0x2eda05,'path':_0x56719e(0x16b),'tls':_0x1407d2[_0x56719e(0x1cf)],'sni':_0x2eda05,'alpn':'','fp':_0x1407d2[_0x56719e(0x2ac)]};let _0x10485b=_0x56719e(0x28f)+UUID+'@'+CFIP+':'+CFPORT+_0x56719e(0x2e7)+_0x2eda05+_0x56719e(0x26c)+_0x2eda05+_0x56719e(0x22b)+_0x4181ea+_0x56719e(0x2c3)+Buffer[_0x56719e(0x1ae)](JSON[_0x56719e(0x216)](_0x18295b))[_0x56719e(0x272)](_0x56719e(0x1a8))+_0x56719e(0x1bb)+UUID+'@'+CFIP+':'+CFPORT+_0x56719e(0x2cd)+_0x2eda05+_0x56719e(0x26c)+_0x2eda05+_0x56719e(0x2e1)+_0x4181ea+_0x56719e(0x2f7);if(_0x1407d2[_0x56719e(0x187)](isValidPort,HY2_PORT)){const _0x25fdd0=_0x1407d2[_0x56719e(0x1ea)](getCertificateFingerprint,certPath),_0x5e097b=_0x25fdd0?_0x56719e(0x266)+encodeURIComponent(_0x25fdd0):'',_0x5a8cfe=_0x56719e(0x28a)+UUID+'@'+_0x263d9a+':'+HY2_PORT+_0x56719e(0x2f1)+_0x5e097b+'#'+_0x4181ea;_0x10485b+=_0x5a8cfe;}if(isValidPort(REALITY_PORT)){const _0x3ecd8b=_0x56719e(0x28f)+UUID+'@'+_0x263d9a+':'+REALITY_PORT+_0x56719e(0x2ce)+publicKey+_0x56719e(0x2c4)+_0x4181ea;_0x10485b+=_0x3ecd8b;}if(_0x1407d2[_0x56719e(0x1fd)](isValidPort,S5_PORT)){const _0x5cd1ea=Buffer[_0x56719e(0x1ae)](UUID[_0x56719e(0x208)](0x0,0x8)+':'+UUID[_0x56719e(0x277)](-0xc))[_0x56719e(0x272)](_0x56719e(0x1a8)),_0x33678b=_0x56719e(0x290)+_0x5cd1ea+'@'+_0x263d9a+':'+S5_PORT+'#'+_0x4181ea;_0x10485b+=_0x33678b;}console[_0x56719e(0x2be)](Buffer[_0x56719e(0x1ae)](_0x10485b)[_0x56719e(0x272)](_0x1407d2[_0x56719e(0x1bc)])),fs[_0x56719e(0x1f2)](subPath,Buffer[_0x56719e(0x1ae)](_0x10485b)[_0x56719e(0x272)](_0x1407d2[_0x56719e(0x1bc)])),fs[_0x56719e(0x1f2)](listPath,_0x10485b,_0x56719e(0x1ec)),console[_0x56719e(0x2be)](FILE_PATH+_0x56719e(0x23d)),subContent=Buffer[_0x56719e(0x1ae)](_0x10485b)[_0x56719e(0x272)](_0x56719e(0x1a8)),_0x1407d2[_0x56719e(0x31a)](uploadNodes),_0x1407d2[_0x56719e(0x1ea)](_0x3d50cb,_0x10485b);},0x7d0);});}async function uploadNodes(){const _0x3ab078=_0x522f37,_0x10f202={'RWqaZ':_0x3ab078(0x292),'oLMco':_0x3ab078(0x1d6)};if(UPLOAD_URL&&PROJECT_URL){const _0xf26014=PROJECT_URL+'/'+SUB_PATH,_0x21e490={'subscription':[_0xf26014]};try{const _0x37f998=await axios[_0x3ab078(0x1de)](UPLOAD_URL+_0x3ab078(0x2c9),_0x21e490,{'headers':{'Content-Type':_0x3ab078(0x1eb)}});return _0x37f998&&_0x37f998[_0x3ab078(0x1c0)]===0xc8?(console[_0x3ab078(0x2be)](_0x10f202[_0x3ab078(0x22a)]),_0x37f998):null;}catch(_0x59d5ae){if(_0x59d5ae[_0x3ab078(0x211)]){if(_0x59d5ae[_0x3ab078(0x211)][_0x3ab078(0x1c0)]===0x190){}}}}else{if(UPLOAD_URL){if(!fs[_0x3ab078(0x286)](listPath))return;const _0x20b809=fs[_0x3ab078(0x26a)](listPath,_0x10f202[_0x3ab078(0x314)]),_0x5bda43=_0x20b809[_0x3ab078(0x182)]('\x0a')[_0x3ab078(0x1a1)](_0x39a0d3=>/(vless|vmess|trojan|hysteria2|socks):\/\//[_0x3ab078(0x15d)](_0x39a0d3));if(_0x5bda43[_0x3ab078(0x19d)]===0x0)return;const _0x2ad473=JSON[_0x3ab078(0x216)]({'nodes':_0x5bda43});try{const _0x18da38=await axios[_0x3ab078(0x1de)](UPLOAD_URL+_0x3ab078(0x2d7),_0x2ad473,{'headers':{'Content-Type':_0x3ab078(0x1eb)}});return _0x18da38&&_0x18da38[_0x3ab078(0x1c0)]===0xc8?(console[_0x3ab078(0x2be)](_0x3ab078(0x267)),_0x18da38):null;}catch(_0x1e318d){return null;}}else return;}}function cleanFiles(){const _0x266499=_0x522f37,_0x52f968={'BMHLA':function(_0x234196,_0x268f7d){return _0x234196(_0x268f7d);},'yLqWN':_0x266499(0x210),'xfgkk':function(_0x3cd298,_0x461db6){return _0x3cd298===_0x461db6;},'YPJVd':_0x266499(0x169),'SUfKu':function(_0x253e6b,_0x50d3f7,_0x55a9fb){return _0x253e6b(_0x50d3f7,_0x55a9fb);}};setTimeout(()=>{const _0x247269=_0x266499,_0x53ceee={'gklcw':function(_0x48f337,_0x503e36){const _0x5a8369=_0x2a15;return _0x52f968[_0x5a8369(0x18e)](_0x48f337,_0x503e36);},'MNKjg':_0x52f968[_0x247269(0x278)]},_0x5ba5f9=[bootLogPath,configPath,webPath,botPath,listPath,certPath,keyPath];if(NEZHA_PORT)_0x5ba5f9[_0x247269(0x1fa)](npmPath);else NEZHA_SERVER&&NEZHA_KEY&&_0x5ba5f9[_0x247269(0x1fa)](phpPath);_0x52f968[_0x247269(0x2ae)](process[_0x247269(0x145)],_0x52f968[_0x247269(0x1af)])?_0x52f968[_0x247269(0x25f)](exec,_0x247269(0x24d)+_0x5ba5f9[_0x247269(0x14f)]('\x20')+_0x247269(0x17e),_0x1243a1=>{const _0x103fc9=_0x247269;console[_0x103fc9(0x22f)](),_0x53ceee[_0x103fc9(0x2f0)](alwaysLog,_0x53ceee[_0x103fc9(0x2d4)]),console[_0x103fc9(0x2be)](_0x103fc9(0x2ef));}):exec(_0x247269(0x284)+_0x5ba5f9[_0x247269(0x14f)]('\x20')+_0x247269(0x27a),_0x1d741f=>{const _0x58db9a=_0x247269;console[_0x58db9a(0x22f)](),_0x53ceee[_0x58db9a(0x2f0)](alwaysLog,_0x53ceee[_0x58db9a(0x2d4)]),console[_0x58db9a(0x2be)](_0x58db9a(0x2ef));});},0x15f90);}cleanFiles();async function sendTelegram(){const _0x3aa0c1=_0x522f37,_0x1ddbfd={'rdSqS':_0x3aa0c1(0x2e5),'PTSCC':_0x3aa0c1(0x2ed),'kqgvT':_0x3aa0c1(0x190)};if(!BOT_TOKEN||!CHAT_ID){console[_0x3aa0c1(0x2be)](_0x3aa0c1(0x1b2));return;}try{const _0x52b8e1=fs[_0x3aa0c1(0x26a)](subPath,_0x3aa0c1(0x1ec)),_0x315d57=_0x3aa0c1(0x264)+BOT_TOKEN+_0x3aa0c1(0x2a2),_0x5c14b3=NAME[_0x3aa0c1(0x1d4)](/[_*\[\]()~`>#+=|{}.!-]/g,_0x3aa0c1(0x15f)),_0x5a7bb9={'chat_id':CHAT_ID,'text':'**'+_0x5c14b3+_0x3aa0c1(0x2c7)+_0x52b8e1+_0x3aa0c1(0x312),'parse_mode':_0x1ddbfd[_0x3aa0c1(0x1e5)]};await axios[_0x3aa0c1(0x1de)](_0x315d57,null,{'params':_0x5a7bb9}),console[_0x3aa0c1(0x2be)](_0x1ddbfd[_0x3aa0c1(0x1cd)]);}catch(_0x335351){console[_0x3aa0c1(0x188)](_0x1ddbfd[_0x3aa0c1(0x2b1)],_0x335351[_0x3aa0c1(0x1f8)]);}}async function AddVisitTask(){const _0x143ca1=_0x522f37,_0x4044fc={'pyxNf':function(_0x3d3040,_0x25d306){return _0x3d3040||_0x25d306;},'rDAML':_0x143ca1(0x29b),'GxjDX':_0x143ca1(0x1eb)};if(_0x4044fc[_0x143ca1(0x2ba)](!AUTO_ACCESS,!PROJECT_URL)){console[_0x143ca1(0x2be)](_0x143ca1(0x22e));return;}try{const _0x35e80f=await axios[_0x143ca1(0x1de)](_0x4044fc[_0x143ca1(0x302)],{'url':PROJECT_URL},{'headers':{'Content-Type':_0x4044fc[_0x143ca1(0x26b)]}});return console[_0x143ca1(0x2be)](_0x143ca1(0x32a)),_0x35e80f;}catch(_0x164442){return console[_0x143ca1(0x188)](_0x143ca1(0x1ad)+_0x164442[_0x143ca1(0x1f8)]),null;}}async function startserver(){const _0x886fdd=_0x522f37,_0x3d07cd={'Kvnrg':_0x886fdd(0x149),'Topcp':function(_0x4003ea){return _0x4003ea();},'iqAlb':function(_0x250cd6,_0x1ddf1d,_0x58b7d4){return _0x250cd6(_0x1ddf1d,_0x58b7d4);}};try{const _0x536e55=_0x3d07cd[_0x886fdd(0x1aa)][_0x886fdd(0x182)]('|');let _0x2e28ad=0x0;while(!![]){switch(_0x536e55[_0x2e28ad++]){case'0':await _0x3d07cd[_0x886fdd(0x1a0)](extractDomains);continue;case'1':await _0x3d07cd[_0x886fdd(0x1a0)](generateConfig);continue;case'2':argoType();continue;case'3':isValidPort(REALITY_PORT)&&generateOrLoadKeyPair();continue;case'4':await _0x3d07cd[_0x886fdd(0x1a0)](AddVisitTask);continue;case'5':await _0x3d07cd[_0x886fdd(0x1a0)](downloadFilesAndRun);continue;case'6':cleanupOldFiles();continue;case'7':deleteNodes();continue;case'8':isValidPort(HY2_PORT)&&_0x3d07cd[_0x886fdd(0x2a6)](ensureTlsCertificates,certPath,keyPath);continue;case'9':await sendTelegram();continue;}break;}}catch(_0x2f6ef4){console[_0x886fdd(0x188)](_0x886fdd(0x248),_0x2f6ef4);}}startserver()[_0x522f37(0x1c1)](_0x307baf=>{const _0x229175=_0x522f37,_0x585d44={'JuWgZ':_0x229175(0x316)};console[_0x229175(0x188)](_0x585d44[_0x229175(0x1d1)],_0x307baf);});const server=http[_0x522f37(0x204)](async(_0x35eb43,_0x5bc85a)=>{const _0x3d2aac=_0x522f37,_0xf9a9ee={'OUpQz':function(_0x1d8f34,_0x3e3570){return _0x1d8f34===_0x3e3570;},'AtGGS':_0x3d2aac(0x1d6),'rPYCm':_0x3d2aac(0x174),'FuRZV':_0x3d2aac(0x1a6),'FvdGO':_0x3d2aac(0x18a),'mdbFR':_0x3d2aac(0x24a)},_0x154a21=_0x35eb43[_0x3d2aac(0x245)][_0x3d2aac(0x182)]('?')[0x0];if(_0xf9a9ee[_0x3d2aac(0x176)](_0x154a21,'/'+SUB_PATH)){if(subContent)_0x5bc85a[_0x3d2aac(0x250)](0xc8,{'Content-Type':_0x3d2aac(0x24a)}),_0x5bc85a[_0x3d2aac(0x31e)](subContent);else try{const _0x4f7008=fs[_0x3d2aac(0x26a)](subPath,_0xf9a9ee[_0x3d2aac(0x297)]);_0x5bc85a[_0x3d2aac(0x250)](0xc8,{'Content-Type':_0x3d2aac(0x24a)}),_0x5bc85a[_0x3d2aac(0x31e)](_0x4f7008);}catch(_0x5c39a5){_0x5bc85a[_0x3d2aac(0x250)](0x1f7,{'Content-Type':_0x3d2aac(0x24a)}),_0x5bc85a[_0x3d2aac(0x31e)](_0x3d2aac(0x18d));}return;}if(_0xf9a9ee[_0x3d2aac(0x176)](_0x154a21,'/')){try{const _0x5775fa=path[_0x3d2aac(0x14f)](__dirname,_0xf9a9ee[_0x3d2aac(0x276)]),_0x5a63e3=await fs[_0x3d2aac(0x282)][_0x3d2aac(0x23f)](_0x5775fa,_0x3d2aac(0x1ec));_0x5bc85a[_0x3d2aac(0x250)](0xc8,{'Content-Type':_0x3d2aac(0x1a6)}),_0x5bc85a[_0x3d2aac(0x31e)](_0x5a63e3);}catch(_0x680084){_0x5bc85a[_0x3d2aac(0x250)](0xc8,{'Content-Type':_0xf9a9ee[_0x3d2aac(0x2ad)]}),_0x5bc85a[_0x3d2aac(0x31e)](_0xf9a9ee[_0x3d2aac(0x329)]);}return;}_0x5bc85a[_0x3d2aac(0x250)](0x194,{'Content-Type':_0xf9a9ee[_0x3d2aac(0x17f)]}),_0x5bc85a[_0x3d2aac(0x31e)](_0x3d2aac(0x1d8));});server[_0x522f37(0x238)](PORT,()=>alwaysLog(_0x522f37(0x1c6)+PORT+'!'));
+const http = require("http");
+const axios = require("axios");
+const os = require("os");
+const fs = require("fs");
+const path = require("path");
+const { spawn } = require("child_process");
+
+// 环境变量配置与缺省值
+const FILE_PATH = process.env.FILE_PATH || path.join(process.cwd(), '.npm');
+const SUB_PATH = process.env.SUB_PATH || 'sub';
+const PORT = parseInt(process.env.SERVER_PORT || process.env.PORT || '3000', 10);
+const UUID = process.env.UUID || 'cfac9249-36c8-4790-a918-d38fa847d099';
+const ARGO_DOMAIN = process.env.ARGO_DOMAIN || '';
+const ARGO_AUTH = process.env.ARGO_AUTH || '';
+const ARGO_PORT = parseInt(process.env.ARGO_PORT || '8003', 10);
+const CFIP = process.env.CFIP || '104.21.36.66';
+const CFPORT = parseInt(process.env.CFPORT || '443', 10);
+const NAME = process.env.NAME || 'CA-OVHcloud';
+const PROJECT_URL = process.env.PROJECT_URL || '';
+
+if (!fs.existsSync(FILE_PATH)) {
+  fs.mkdirSync(FILE_PATH, { recursive: true });
+}
+
+function generateRandomName() {
+  const characters = 'abcdefghijklmnopqrstuvwxyz';
+  let result = '';
+  for (let i = 0; i < 6; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+const webName = generateRandomName();
+const botName = generateRandomName();
+const webPath = path.join(FILE_PATH, webName);
+const botPath = path.join(FILE_PATH, botName);
+const subPath = path.join(FILE_PATH, 'sub.txt');
+const configPath = path.join(FILE_PATH, 'config.json');
+
+let subContent = null;
+let webProcess = null;
+let botProcess = null;
+
+function log(tag, message) {
+  const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  console.log(`[${ts}] [${tag}] ${message}`);
+}
+
+// 生成 Xray 配置
+function generateConfig() {
+  const config = {
+    log: { access: 'none', error: '', loglevel: 'warning' },
+    inbounds: [
+      {
+        port: ARGO_PORT,
+        listen: '::',
+        protocol: 'vless',
+        settings: {
+          clients: [{ id: UUID, flow: 'xtls-rprx-vision' }],
+          decryption: 'none',
+          fallbacks: [
+            { dest: 3001 },
+            { path: '/vless-argo', dest: 3002 },
+            { path: '/vmess-argo', dest: 3003 },
+            { path: '/trojan-argo', dest: 3004 }
+          ]
+        },
+        streamSettings: { network: 'tcp' }
+      },
+      {
+        port: 3001,
+        listen: '127.0.0.1',
+        protocol: 'vless',
+        settings: { clients: [{ id: UUID }], decryption: 'none' },
+        streamSettings: { network: 'tcp', security: 'none' }
+      },
+      {
+        port: 3002,
+        listen: '127.0.0.1',
+        protocol: 'vless',
+        settings: { clients: [{ id: UUID, level: 0 }], decryption: 'none' },
+        streamSettings: {
+          network: 'ws',
+          security: 'none',
+          wsSettings: { path: '/vless-argo' }
+        },
+        sniffing: { enabled: true, destOverride: ['http', 'tls', 'quic'], metadataOnly: false }
+      },
+      {
+        port: 3003,
+        listen: '127.0.0.1',
+        protocol: 'vmess',
+        settings: { clients: [{ id: UUID, alterId: 0 }] },
+        streamSettings: {
+          network: 'ws',
+          wsSettings: { path: '/vmess-argo' }
+        },
+        sniffing: { enabled: true, destOverride: ['http', 'tls', 'quic'], metadataOnly: false }
+      },
+      {
+        port: 3004,
+        listen: '127.0.0.1',
+        protocol: 'trojan',
+        settings: { clients: [{ password: UUID }] },
+        streamSettings: {
+          network: 'ws',
+          security: 'none',
+          wsSettings: { path: '/trojan-argo' }
+        },
+        sniffing: { enabled: true, destOverride: ['http', 'tls', 'quic'], metadataOnly: false }
+      }
+    ],
+    dns: { servers: ['https+local://8.8.8.8/dns-query'] },
+    outbounds: [
+      { protocol: 'freedom', tag: 'direct' },
+      { protocol: 'blackhole', tag: 'block' }
+    ]
+  };
+
+  fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
+  log('CONFIG', `Xray config generated at ${configPath} (listening on port ${ARGO_PORT})`);
+}
+
+function getSystemArchitecture() {
+  const arch = os.arch();
+  if (arch === 'arm' || arch === 'arm64' || arch === 'aarch64') {
+    return 'arm';
+  }
+  return 'amd';
+}
+
+function downloadFile(filePath, url) {
+  return new Promise((resolve, reject) => {
+    const writer = fs.createWriteStream(filePath);
+    axios({
+      method: 'get',
+      url: url,
+      responseType: 'stream',
+      headers: { 'User-Agent': 'Mozilla/5.0' },
+      timeout: 30000
+    })
+      .then(response => {
+        response.data.pipe(writer);
+        writer.on('finish', () => {
+          writer.close();
+          log('DOWNLOAD', `Saved ${path.basename(filePath)} from ${url}`);
+          resolve(filePath);
+        });
+        writer.on('error', err => {
+          fs.unlink(filePath, () => {});
+          reject(err);
+        });
+      })
+      .catch(err => {
+        fs.unlink(filePath, () => {});
+        reject(err);
+      });
+  });
+}
+
+async function downloadBinaries() {
+  const arch = getSystemArchitecture();
+  const baseUrl = arch === 'arm' ? 'https://arm64.ssss.nyc.mn' : 'https://amd64.ssss.nyc.mn';
+
+  log('SYSTEM', `Detected architecture: ${arch}`);
+  await downloadFile(webPath, `${baseUrl}/web`);
+  await downloadFile(botPath, `${baseUrl}/bot`);
+
+  fs.chmodSync(webPath, 0o775);
+  fs.chmodSync(botPath, 0o775);
+  log('PERM', `Permissions 775 applied to binaries in ${FILE_PATH}`);
+}
+
+function startXray() {
+  log('XRAY', `Launching Xray process (${webPath})...`);
+  webProcess = spawn(webPath, ['-c', configPath], {
+    stdio: ['ignore', 'pipe', 'pipe']
+  });
+
+  webProcess.stdout.on('data', data => {
+    const s = data.toString().trim();
+    if (s) log('XRAY:OUT', s);
+  });
+
+  webProcess.stderr.on('data', data => {
+    const s = data.toString().trim();
+    if (s) log('XRAY:ERR', s);
+  });
+
+  webProcess.on('exit', (code, signal) => {
+    log('XRAY:WATCHDOG', `Xray exited (code=${code}, signal=${signal}). Auto-restarting in 5s...`);
+    setTimeout(startXray, 5000);
+  });
+}
+
+function startCloudflared() {
+  if (!fs.existsSync(botPath)) {
+    log('ARGO', `Cloudflared binary not found: ${botPath}`);
+    return;
+  }
+
+  let args = [];
+  if (ARGO_AUTH && ARGO_AUTH.length >= 100) {
+    log('ARGO', `Using token tunnel connection to Cloudflare edge`);
+    args = [
+      'tunnel',
+      '--edge-ip-version', 'auto',
+      '--no-autoupdate',
+      '--protocol', 'http2',
+      'run',
+      '--token', ARGO_AUTH
+    ];
+  } else {
+    log('ARGO', `Using quick tunnel forwarding to http://localhost:${ARGO_PORT}`);
+    args = [
+      'tunnel',
+      '--edge-ip-version', 'auto',
+      '--no-autoupdate',
+      '--protocol', 'http2',
+      '--url', `http://localhost:${ARGO_PORT}`
+    ];
+  }
+
+  log('ARGO', `Spawning cloudflared: ${botPath} ${args.slice(0, -1).join(' ')} [token hidden]`);
+  botProcess = spawn(botPath, args, {
+    stdio: ['ignore', 'pipe', 'pipe']
+  });
+
+  const handleOutput = (data, isErr) => {
+    const text = data.toString();
+    const lines = text.split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) continue;
+      log(isErr ? 'ARGO:ERR' : 'ARGO:OUT', trimmed);
+
+      // 提取临时隧道域名
+      if (!ARGO_AUTH || !ARGO_DOMAIN) {
+        const m = trimmed.match(/https?:\/\/([a-zA-Z0-9.-]+\.trycloudflare\.com)/);
+        if (m && m[1]) {
+          log('ARGO', `Quick tunnel active domain: ${m[1]}`);
+          generateSubscription(m[1]);
+        }
+      }
+    }
+  };
+
+  botProcess.stdout.on('data', data => handleOutput(data, false));
+  botProcess.stderr.on('data', data => handleOutput(data, true));
+
+  botProcess.on('exit', (code, signal) => {
+    log('ARGO:WATCHDOG', `Cloudflared exited (code=${code}, signal=${signal}). Auto-restarting in 5s...`);
+    setTimeout(startCloudflared, 5000);
+  });
+}
+
+function generateSubscription(domain) {
+  const targetDomain = domain || ARGO_DOMAIN;
+  if (!targetDomain) return;
+
+  const vmessObj = {
+    v: '2',
+    ps: NAME,
+    add: CFIP,
+    port: CFPORT,
+    id: UUID,
+    aid: '0',
+    scy: 'none',
+    net: 'ws',
+    type: 'none',
+    host: targetDomain,
+    path: '/vmess-argo?ed=2560',
+    tls: 'tls',
+    sni: targetDomain,
+    alpn: '',
+    fp: 'firefox'
+  };
+
+  const lines = [
+    `vless://${UUID}@${CFIP}:${CFPORT}?encryption=none&security=tls&sni=${targetDomain}&fp=firefox&type=ws&host=${targetDomain}&path=%2Fvless-argo%3Fed%3D2560#${encodeURIComponent(NAME)}`,
+    '',
+    `vmess://${Buffer.from(JSON.stringify(vmessObj)).toString('base64')}`,
+    '',
+    `trojan://${UUID}@${CFIP}:${CFPORT}?security=tls&sni=${targetDomain}&fp=firefox&type=ws&host=${targetDomain}&path=%2Ftrojan-argo%3Fed%3D2560#${encodeURIComponent(NAME)}`
+  ].join('\n');
+
+  subContent = Buffer.from(lines).toString('base64');
+  fs.writeFileSync(subPath, subContent);
+  log('SUB', `Saved subscription to ${subPath}`);
+  console.log('\n--- SUBSCRIPTION BASE64 ---\n' + subContent + '\n--- END SUBSCRIPTION ---\n');
+}
+
+function startHttpServer() {
+  const server = http.createServer((req, res) => {
+    const url = req.url.split('?')[0];
+    if (url === '/' + SUB_PATH) {
+      if (subContent) {
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end(subContent);
+      } else {
+        res.writeHead(503, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Subscription initializing...');
+      }
+      return;
+    }
+    if (url === '/ping' || url === '/health') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'ok', uptime: process.uptime() }));
+      return;
+    }
+    if (url === '/') {
+      const htmlPath = path.join(__dirname, 'index.html');
+      if (fs.existsSync(htmlPath)) {
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(fs.readFileSync(htmlPath, 'utf8'));
+      } else {
+        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+        res.end('Argo Proxy Node is running normally.');
+      }
+      return;
+    }
+    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    res.end('Not Found');
+  });
+
+  server.listen(PORT, '0.0.0.0', () => {
+    log('HTTP', `Web server listening on 0.0.0.0:${PORT} (Subscription URL: /${SUB_PATH})`);
+  });
+}
+
+// 容器自保活心跳（防止免费 PaaS 平台因空闲停机）
+function startKeepAlive() {
+  if (PROJECT_URL) {
+    log('KEEPALIVE', `Periodic self-ping configured for ${PROJECT_URL}/ping`);
+    setInterval(async () => {
+      try {
+        await axios.get(`${PROJECT_URL}/ping`, { timeout: 6000 });
+        log('KEEPALIVE', `Self-ping OK`);
+      } catch (err) {
+        log('KEEPALIVE', `Self-ping warning: ${err.message}`);
+      }
+    }, 120000); // 每2分钟一次
+  }
+}
+
+async function main() {
+  try {
+    startHttpServer();
+    generateConfig();
+    await downloadBinaries();
+    startXray();
+    startCloudflared();
+    if (ARGO_DOMAIN) {
+      generateSubscription(ARGO_DOMAIN);
+    }
+    startKeepAlive();
+    log('READY', 'All background processes started with watchdog supervision.');
+  } catch (err) {
+    log('FATAL', `Startup failure: ${err.stack || err}`);
+  }
+}
+
+main();
