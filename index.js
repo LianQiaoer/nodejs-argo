@@ -7,6 +7,24 @@ const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
 
+// 异常防护：防止任何未捕获异常导致 Node.js 退出
+process.on('uncaughtException', (err) => {
+  const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  console.error(`[${ts}] [FATAL:UNCAUGHT] ${err.stack || err}`);
+});
+process.on('unhandledRejection', (reason) => {
+  const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  console.error(`[${ts}] [FATAL:REJECTION] ${reason}`);
+});
+process.on('SIGTERM', () => {
+  const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  console.log(`[${ts}] [SYSTEM] Received SIGTERM signal from platform`);
+});
+process.on('SIGINT', () => {
+  const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
+  console.log(`[${ts}] [SYSTEM] Received SIGINT signal`);
+});
+
 // 环境变量配置与缺省值（内置永久固定隧道配置，即便平台未填环境变量亦可秒级自愈）
 const FILE_PATH = process.env.FILE_PATH || path.join(process.cwd(), '.npm');
 const SUB_PATH = process.env.SUB_PATH || 'sub';
@@ -175,6 +193,9 @@ async function downloadBinaries() {
 }
 
 function startXray() {
+  if (webProcess && !webProcess.killed && webProcess.exitCode === null) {
+    return;
+  }
   log('XRAY', `Launching Xray process (${webPath})...`);
   webProcess = spawn(webPath, ['-c', configPath], {
     stdio: ['ignore', 'pipe', 'pipe']
@@ -190,13 +211,20 @@ function startXray() {
     if (s) log('XRAY:ERR', s);
   });
 
+  webProcess.on('error', err => {
+    log('XRAY:ERROR_EVENT', err.stack || err);
+  });
+
   webProcess.on('exit', (code, signal) => {
-    log('XRAY:WATCHDOG', `Xray exited (code=${code}, signal=${signal}). Auto-restarting in 5s...`);
-    setTimeout(startXray, 5000);
+    log('XRAY:WATCHDOG', `Xray exited (code=${code}, signal=${signal}). Auto-restarting in 3s...`);
+    setTimeout(startXray, 3000);
   });
 }
 
 function startCloudflared() {
+  if (botProcess && !botProcess.killed && botProcess.exitCode === null) {
+    return;
+  }
   if (!fs.existsSync(botPath)) {
     log('ARGO', `Cloudflared binary not found: ${botPath}`);
     return;
@@ -209,7 +237,7 @@ function startCloudflared() {
       'tunnel',
       '--edge-ip-version', 'auto',
       '--no-autoupdate',
-      '--protocol', 'http2',
+      '--protocol', 'auto',
       'run',
       '--token', ARGO_AUTH
     ];
@@ -219,7 +247,7 @@ function startCloudflared() {
       'tunnel',
       '--edge-ip-version', 'auto',
       '--no-autoupdate',
-      '--protocol', 'http2',
+      '--protocol', 'auto',
       '--url', `http://localhost:${ARGO_PORT}`
     ];
   }
@@ -251,9 +279,13 @@ function startCloudflared() {
   botProcess.stdout.on('data', data => handleOutput(data, false));
   botProcess.stderr.on('data', data => handleOutput(data, true));
 
+  botProcess.on('error', err => {
+    log('ARGO:ERROR_EVENT', err.stack || err);
+  });
+
   botProcess.on('exit', (code, signal) => {
-    log('ARGO:WATCHDOG', `Cloudflared exited (code=${code}, signal=${signal}). Auto-restarting in 5s...`);
-    setTimeout(startCloudflared, 5000);
+    log('ARGO:WATCHDOG', `Cloudflared exited (code=${code}, signal=${signal}). Auto-restarting in 3s...`);
+    setTimeout(startCloudflared, 3000);
   });
 }
 
@@ -295,6 +327,9 @@ function generateSubscription(domain) {
 
 function startHttpServer() {
   const server = http.createServer((req, res) => {
+    req.on('error', (err) => log('HTTP:REQ_ERR', err.message));
+    res.on('error', (err) => log('HTTP:RES_ERR', err.message));
+
     const url = req.url.split('?')[0];
     if (url === '/' + SUB_PATH) {
       if (subContent) {
@@ -326,6 +361,10 @@ function startHttpServer() {
     res.end('Not Found');
   });
 
+  server.on('error', (err) => {
+    log('HTTP:SERVER_ERROR', err.stack || err);
+  });
+
   server.listen(PORT, '0.0.0.0', () => {
     log('HTTP', `Web server listening on 0.0.0.0:${PORT} (Subscription URL: /${SUB_PATH})`);
   });
@@ -346,6 +385,23 @@ function startKeepAlive() {
   }
 }
 
+// 全局 30 秒心跳看门狗：主动巡检子进程健康状态，输出探针并自动拉起
+function startWatchdogLoop() {
+  setInterval(() => {
+    const xrayAlive = webProcess && !webProcess.killed && webProcess.exitCode === null;
+    const argoAlive = botProcess && !botProcess.killed && botProcess.exitCode === null;
+    log('WATCHDOG:HEARTBEAT', `Uptime: ${Math.floor(process.uptime())}s | Xray: ${xrayAlive ? 'RUNNING' : 'DEAD'} | Cloudflared: ${argoAlive ? 'RUNNING' : 'DEAD'}`);
+    if (!xrayAlive) {
+      log('WATCHDOG', 'Reviving dead Xray process...');
+      startXray();
+    }
+    if (!argoAlive) {
+      log('WATCHDOG', 'Reviving dead Cloudflared process...');
+      startCloudflared();
+    }
+  }, 30000);
+}
+
 async function main() {
   try {
     startHttpServer();
@@ -355,6 +411,7 @@ async function main() {
     startCloudflared();
     generateSubscription(ARGO_DOMAIN);
     startKeepAlive();
+    startWatchdogLoop();
     log('READY', 'All background processes started with watchdog supervision.');
   } catch (err) {
     log('FATAL', `Startup failure: ${err.stack || err}`);
