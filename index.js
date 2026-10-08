@@ -220,15 +220,14 @@ function startCloudflared() {
     return;
   }
 
-  // 必须使用 http2（TCP 443），杜绝在容器环境下 QUIC/UDP 丢包与 NAT 超时断连
+  // 使用 Cloudflare 推荐的 QUIC 原生协议，避免 HTTP/2 在客户端断开连接时触发控制流取消 Bug
   let args = [];
   if (ARGO_AUTH && ARGO_AUTH.length >= 100) {
-    log('ARGO', `Using Named Tunnel (Token HTTP/2 TCP mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
+    log('ARGO', `Using Named Tunnel (Token QUIC mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
     args = [
       'tunnel',
       '--edge-ip-version', '4',
       '--no-autoupdate',
-      '--protocol', 'http2',
       'run',
       '--token', ARGO_AUTH
     ];
@@ -238,7 +237,6 @@ function startCloudflared() {
       'tunnel',
       '--edge-ip-version', '4',
       '--no-autoupdate',
-      '--protocol', 'http2',
       '--url', `http://localhost:${ARGO_PORT}`
     ];
   }
