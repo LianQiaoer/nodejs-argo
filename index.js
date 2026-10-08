@@ -7,7 +7,7 @@ const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
 
-// 异常防护：防止任何未捕获异常导致 Node.js 退出
+// 异常防护：拦截未捕获错误，确保主进程不退
 process.on('uncaughtException', (err) => {
   const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
   console.error(`[${ts}] [FATAL:UNCAUGHT] ${err.stack || err}`);
@@ -18,14 +18,14 @@ process.on('unhandledRejection', (reason) => {
 });
 process.on('SIGTERM', () => {
   const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
-  console.log(`[${ts}] [SYSTEM] Received SIGTERM signal from platform`);
+  console.log(`[${ts}] [SYSTEM] Received SIGTERM from platform`);
 });
 process.on('SIGINT', () => {
   const ts = new Date().toISOString().replace('T', ' ').substring(0, 19);
-  console.log(`[${ts}] [SYSTEM] Received SIGINT signal`);
+  console.log(`[${ts}] [SYSTEM] Received SIGINT`);
 });
 
-// 环境变量配置与缺省值（内置永久固定隧道配置，即便平台未填环境变量亦可秒级自愈）
+// 核心参数与硬编码兜底（保证白板部署亦能秒连正式隧道）
 const FILE_PATH = process.env.FILE_PATH || path.join(process.cwd(), '.npm');
 const SUB_PATH = process.env.SUB_PATH || 'sub';
 const PORT = parseInt(process.env.SERVER_PORT || process.env.PORT || '3000', 10);
@@ -198,25 +198,15 @@ function startXray() {
   }
   log('XRAY', `Launching Xray process (${webPath})...`);
   webProcess = spawn(webPath, ['-c', configPath], {
-    stdio: ['ignore', 'pipe', 'pipe']
-  });
-
-  webProcess.stdout.on('data', data => {
-    const s = data.toString().trim();
-    if (s) log('XRAY:OUT', s);
-  });
-
-  webProcess.stderr.on('data', data => {
-    const s = data.toString().trim();
-    if (s) log('XRAY:ERR', s);
+    stdio: 'inherit'
   });
 
   webProcess.on('error', err => {
-    log('XRAY:ERROR_EVENT', err.stack || err);
+    log('XRAY:ERROR', err.stack || err);
   });
 
   webProcess.on('exit', (code, signal) => {
-    log('XRAY:WATCHDOG', `Xray exited (code=${code}, signal=${signal}). Auto-restarting in 3s...`);
+    log('XRAY:WATCHDOG', `Xray exited (code=${code}, signal=${signal}). Restarting in 3s...`);
     setTimeout(startXray, 3000);
   });
 }
@@ -230,14 +220,15 @@ function startCloudflared() {
     return;
   }
 
+  // 必须使用 http2（TCP 443），杜绝在容器环境下 QUIC/UDP 丢包与 NAT 超时断连
   let args = [];
   if (ARGO_AUTH && ARGO_AUTH.length >= 100) {
-    log('ARGO', `Using Named Tunnel (Token mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
+    log('ARGO', `Using Named Tunnel (Token HTTP/2 TCP mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
     args = [
       'tunnel',
       '--edge-ip-version', 'auto',
       '--no-autoupdate',
-      '--protocol', 'auto',
+      '--protocol', 'http2',
       'run',
       '--token', ARGO_AUTH
     ];
@@ -247,44 +238,22 @@ function startCloudflared() {
       'tunnel',
       '--edge-ip-version', 'auto',
       '--no-autoupdate',
-      '--protocol', 'auto',
+      '--protocol', 'http2',
       '--url', `http://localhost:${ARGO_PORT}`
     ];
   }
 
   log('ARGO', `Spawning cloudflared: ${botPath} ${args.slice(0, -1).join(' ')} [token hidden]`);
   botProcess = spawn(botPath, args, {
-    stdio: ['ignore', 'pipe', 'pipe']
+    stdio: 'inherit'
   });
 
-  const handleOutput = (data, isErr) => {
-    const text = data.toString();
-    const lines = text.split('\n');
-    for (const line of lines) {
-      const trimmed = line.trim();
-      if (!trimmed) continue;
-      log(isErr ? 'ARGO:ERR' : 'ARGO:OUT', trimmed);
-
-      // 提取临时隧道域名（仅在 quick tunnel 模式下）
-      if (!ARGO_AUTH || ARGO_AUTH.length < 100) {
-        const m = trimmed.match(/https?:\/\/([a-zA-Z0-9.-]+\.trycloudflare\.com)/);
-        if (m && m[1]) {
-          log('ARGO', `Quick tunnel active domain: ${m[1]}`);
-          generateSubscription(m[1]);
-        }
-      }
-    }
-  };
-
-  botProcess.stdout.on('data', data => handleOutput(data, false));
-  botProcess.stderr.on('data', data => handleOutput(data, true));
-
   botProcess.on('error', err => {
-    log('ARGO:ERROR_EVENT', err.stack || err);
+    log('ARGO:ERROR', err.stack || err);
   });
 
   botProcess.on('exit', (code, signal) => {
-    log('ARGO:WATCHDOG', `Cloudflared exited (code=${code}, signal=${signal}). Auto-restarting in 3s...`);
+    log('ARGO:WATCHDOG', `Cloudflared exited (code=${code}, signal=${signal}). Restarting in 3s...`);
     setTimeout(startCloudflared, 3000);
   });
 }
@@ -325,52 +294,62 @@ function generateSubscription(domain) {
   console.log('\n--- SUBSCRIPTION BASE64 ---\n' + subContent + '\n--- END SUBSCRIPTION ---\n');
 }
 
-function startHttpServer() {
-  const server = http.createServer((req, res) => {
-    req.on('error', (err) => log('HTTP:REQ_ERR', err.message));
-    res.on('error', (err) => log('HTTP:RES_ERR', err.message));
+// 统一 HTTP 请求处理器，全面适配各种健康检查
+function handleHttpRequest(req, res) {
+  req.on('error', () => {});
+  res.on('error', () => {});
 
-    const url = req.url.split('?')[0];
-    if (url === '/' + SUB_PATH) {
-      if (subContent) {
-        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end(subContent);
-      } else {
-        res.writeHead(503, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('Subscription initializing...');
-      }
-      return;
+  const url = (req.url || '/').split('?')[0];
+  if (url === '/' + SUB_PATH) {
+    if (subContent) {
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end(subContent);
+    } else {
+      res.writeHead(503, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Subscription initializing...');
     }
-    if (url === '/ping' || url === '/health') {
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ status: 'ok', uptime: process.uptime() }));
-      return;
+    return;
+  }
+  // 全面响应所有主流平台的存活检查
+  if (url === '/ping' || url === '/health' || url === '/healthz' || url === '/live' || url === '/ready') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'ok', uptime: process.uptime() }));
+    return;
+  }
+  if (url === '/') {
+    const htmlPath = path.join(__dirname, 'index.html');
+    if (fs.existsSync(htmlPath)) {
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(fs.readFileSync(htmlPath, 'utf8'));
+    } else {
+      res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+      res.end('Argo Proxy Node is running normally.');
     }
-    if (url === '/') {
-      const htmlPath = path.join(__dirname, 'index.html');
-      if (fs.existsSync(htmlPath)) {
-        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-        res.end(fs.readFileSync(htmlPath, 'utf8'));
-      } else {
-        res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-        res.end('Argo Proxy Node is running normally.');
-      }
-      return;
-    }
-    res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
-    res.end('Not Found');
-  });
-
-  server.on('error', (err) => {
-    log('HTTP:SERVER_ERROR', err.stack || err);
-  });
-
-  server.listen(PORT, '0.0.0.0', () => {
-    log('HTTP', `Web server listening on 0.0.0.0:${PORT} (Subscription URL: /${SUB_PATH})`);
-  });
+    return;
+  }
+  res.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('Not Found');
 }
 
-// 容器自保活心跳（防止免费 PaaS 平台因空闲停机）
+// 启动多端口 HTTP 监听（同时监听 PORT、80、8080），彻底杜绝 PaaS 平台端口不匹配导致的健康检查超时停机
+function startHttpServers() {
+  const ports = Array.from(new Set([PORT, 80, 8080]));
+  for (const p of ports) {
+    try {
+      const server = http.createServer(handleHttpRequest);
+      server.on('error', (err) => {
+        log('HTTP:WARN', `Could not bind port ${p} (${err.code}), continuing on other ports.`);
+      });
+      server.listen(p, '0.0.0.0', () => {
+        log('HTTP', `Health & Web server active on 0.0.0.0:${p}`);
+      });
+    } catch (e) {
+      // 忽略单个端口绑定异常（例如普通用户无权绑定 80）
+    }
+  }
+}
+
+// 容器自保活心跳
 function startKeepAlive() {
   if (PROJECT_URL) {
     log('KEEPALIVE', `Periodic self-ping configured for ${PROJECT_URL}/ping`);
@@ -381,11 +360,11 @@ function startKeepAlive() {
       } catch (err) {
         log('KEEPALIVE', `Self-ping warning: ${err.message}`);
       }
-    }, 120000); // 每2分钟一次
+    }, 120000);
   }
 }
 
-// 全局 30 秒心跳看门狗：主动巡检子进程健康状态，输出探针并自动拉起
+// 30 秒主动心跳看门狗
 function startWatchdogLoop() {
   setInterval(() => {
     const xrayAlive = webProcess && !webProcess.killed && webProcess.exitCode === null;
@@ -404,7 +383,7 @@ function startWatchdogLoop() {
 
 async function main() {
   try {
-    startHttpServer();
+    startHttpServers();
     generateConfig();
     await downloadBinaries();
     startXray();
