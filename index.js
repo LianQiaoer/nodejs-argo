@@ -74,13 +74,13 @@ function generateConfig() {
     inbounds: [
       {
         port: ARGO_PORT,
-        listen: '::',
+        listen: '0.0.0.0',
         protocol: 'vless',
         settings: {
           clients: [{ id: UUID, flow: 'xtls-rprx-vision' }],
           decryption: 'none',
           fallbacks: [
-            { dest: 3001 },
+            { dest: PORT },
             { path: '/vless-argo', dest: 3002 },
             { path: '/vmess-argo', dest: 3003 },
             { path: '/trojan-argo', dest: 3004 }
@@ -226,7 +226,7 @@ function startCloudflared() {
     log('ARGO', `Using Named Tunnel (Token HTTP/2 TCP mode) for ${ARGO_DOMAIN} -> http://localhost:${ARGO_PORT}`);
     args = [
       'tunnel',
-      '--edge-ip-version', 'auto',
+      '--edge-ip-version', '4',
       '--no-autoupdate',
       '--protocol', 'http2',
       'run',
@@ -236,7 +236,7 @@ function startCloudflared() {
     log('ARGO', `Using quick tunnel forwarding to http://localhost:${ARGO_PORT}`);
     args = [
       'tunnel',
-      '--edge-ip-version', 'auto',
+      '--edge-ip-version', '4',
       '--no-autoupdate',
       '--protocol', 'http2',
       '--url', `http://localhost:${ARGO_PORT}`
@@ -349,8 +349,16 @@ function startHttpServers() {
   }
 }
 
-// 容器自保活心跳
+// 容器与协议栈全链路自保活心跳
 function startKeepAlive() {
+  // 本地内部心跳，每 25 秒触发一次请求，确保 Xray 和 Node 事件循环永不挂起
+  setInterval(async () => {
+    try {
+      await axios.get(`http://127.0.0.1:${PORT}/ping`, { timeout: 3000 });
+      await axios.get(`http://127.0.0.1:${ARGO_PORT}/ping`, { timeout: 3000 });
+    } catch (_) {}
+  }, 25000);
+
   if (PROJECT_URL) {
     log('KEEPALIVE', `Periodic self-ping configured for ${PROJECT_URL}/ping`);
     setInterval(async () => {
